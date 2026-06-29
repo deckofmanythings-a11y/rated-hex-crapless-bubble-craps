@@ -19,19 +19,18 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .auth-field label{display:block;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;letter-spacing:.05em;text-transform:uppercase}
 .auth-field input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:7px;padding:10px 12px;color:#fff;font-size:14px;outline:none;transition:border-color .15s}
 .auth-field input:focus{border-color:rgba(255,215,0,.5)}
-.auth-btn{width:100%;background:#c8a200;border:none;border-radius:8px;color:#111;font-size:15px;font-weight:700;padding:12px;cursor:pointer;margin-top:4px;transition:background .15s}
+.auth-btn{width:100%;background:#c8a200;border:none;border-radius:8px;color:#111;font-size:15px;font-weight:700;padding:12px;cursor:pointer;margin-top:4px}
 .auth-btn:hover{background:#e6bb00}
 .auth-btn:disabled{opacity:.5;cursor:not-allowed}
 .auth-error{background:rgba(180,0,0,.25);border:1px solid rgba(255,80,80,.3);border-radius:7px;padding:10px 12px;font-size:13px;color:#ff9a9a;margin-bottom:16px;display:none}
 #game-screen{display:none;padding:10px}
 .felt{background:#0f5c28;color:#fff;border-radius:12px;padding:12px}
-.slabel{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:5px;display:block}
 .bb{background:rgba(0,0,0,.25);border:0.5px solid rgba(255,255,255,.2);border-radius:6px;color:#fff;font-size:13px;padding:6px 5px 5px;cursor:pointer;text-align:center;transition:background .12s;position:relative;width:100%}
 .bb:hover{background:rgba(255,255,255,.15)}
 .bb.active{background:rgba(255,215,0,.28);border-color:#ffd700}
 .bb .pay{font-size:10px;color:rgba(255,255,255,.45);display:block;margin-top:2px}
 .bb .stk{font-size:11px;color:#ffd700;display:block;min-height:14px}
-.dice-pair{font-size:28px;line-height:1;display:block;letter-spacing:2px}
+.dice-pair{font-size:56px;line-height:1;display:block;letter-spacing:2px}
 .bwrap{position:relative;width:100%}
 .bwrap:hover .mbtn.vis{display:block}
 .mbtn{display:none;position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:3px;background:rgba(0,0,0,.5);border:0.5px solid rgba(255,255,255,.3);color:#fff;font-size:13px;line-height:15px;text-align:center;cursor:pointer;z-index:3;padding:0}
@@ -47,7 +46,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .tab-btn{background:rgba(255,255,255,.1);border:0.5px solid rgba(255,255,255,.2);border-radius:4px;color:rgba(255,255,255,.6);font-size:11px;padding:4px 10px;cursor:pointer}
 .tab-btn.active{background:rgba(255,215,0,.2);border-color:#ffd700;color:#fff}
-.shortcut-btn{background:rgba(255,255,255,.1);border:0.5px solid rgba(255,255,255,.3);border-radius:6px;color:#fff;font-size:13px;padding:6px 9px;cursor:pointer;text-align:center}
+.shortcut-btn{background:rgba(255,255,255,.1);border:0.5px solid rgba(255,255,255,.3);border-radius:6px;color:#fff;font-size:12px;padding:5px 6px;cursor:pointer;text-align:center;width:100%}
 .shortcut-btn:hover{background:rgba(255,255,255,.2)}
 .shortcut-btn.on{background:rgba(100,200,100,.25);border-color:#7ee87e;color:#7ee87e}
 .shortcut-btn:disabled{opacity:.35;cursor:not-allowed}
@@ -99,6 +98,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .hud-label{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:2px}
 .hud-val{font-size:18px;font-weight:500}
 .hdiv{width:0.5px;background:rgba(255,255,255,.15);align-self:stretch}
+/* Bonus bets */
 .bonus-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
 .bonus-box{border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);cursor:pointer;transition:background .12s}
 .bonus-box:hover{background:rgba(255,255,255,.08)}
@@ -109,15 +109,15 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .bonus-box-wrap:hover .mbtn-bonus.vis{display:block}
 .mbtn-bonus{display:none;position:absolute;top:4px;right:4px;width:16px;height:16px;border-radius:3px;background:rgba(0,0,0,.55);border:0.5px solid rgba(255,255,255,.3);color:#fff;font-size:13px;line-height:15px;text-align:center;cursor:pointer;z-index:5;padding:0}
 .mbtn-bonus:hover{background:rgba(180,0,0,.7)}
-.bonus-header{background:rgba(0,0,0,.35);padding:6px 8px;text-align:center;pointer-events:none}
+.bonus-header{background:rgba(0,0,0,.35);padding:6px 8px 0;text-align:center;pointer-events:none}
 .bonus-title{font-size:13px;font-weight:600;color:#ffe066;display:block}
-.bonus-payout{font-size:11px;color:rgba(255,255,255,.5);display:block;margin-top:1px}
-.bonus-body{padding:6px 7px;pointer-events:none}
-.bonus-stake{font-size:14px;font-weight:500;color:#ffd700;text-align:center;min-height:20px;display:block;margin-bottom:4px}
-.bonus-nums{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-bottom:4px;min-height:22px}
-.bnum{width:22px;height:22px;border-radius:3px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);color:rgba(255,255,255,.4);border:0.5px solid rgba(255,255,255,.15);transition:all .2s}
+.bonus-payout{font-size:11px;color:rgba(255,255,255,.5);display:block;margin-top:1px;padding-bottom:6px}
+.bonus-body{padding:0 7px 6px;pointer-events:none}
+.bonus-stake{font-size:14px;font-weight:500;color:#ffd700;text-align:center;min-height:20px;display:block;margin-bottom:4px;margin-top:4px}
+.bonus-nums{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-bottom:0}
+.bnum{width:26px;height:26px;border-radius:3px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);color:rgba(255,255,255,.4);border:0.5px solid rgba(255,255,255,.15);transition:all .2s}
 .bnum.hit{background:rgba(100,255,120,.3);color:#7ee87e;border-color:#7ee87e}
-.bonus-note{font-size:10px;color:rgba(255,255,255,.45);text-align:center;display:block;margin-top:2px}
+.bonus-note{font-size:10px;color:rgba(255,255,255,.45);text-align:center;display:block;margin-top:4px}
 #dice-canvas-wrap{background:rgba(0,0,0,.3);border-radius:8px;overflow:hidden;flex-shrink:0;position:relative}
 #dice-sum-overlay{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:24px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.9);pointer-events:none;transition:opacity .2s}
 .line-bar{display:flex;align-items:stretch;border-radius:6px;overflow:hidden;border:0.5px solid rgba(100,160,255,.4);background:rgba(0,80,180,.2)}
@@ -135,6 +135,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .odds-label{font-size:9px;color:rgba(255,255,255,.5);display:block;margin-bottom:1px}
 .odds-stk{font-size:11px;color:#ffd700;display:block;min-height:14px}
 .odds-pay-lbl{font-size:9px;color:rgba(255,255,255,.4);display:block}
+/* Modals */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.hidden{display:none}
 .modal-box{background:#1a3a28;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:20px 22px;width:100%;max-width:430px;box-shadow:0 8px 40px rgba(0,0,0,.6)}
@@ -156,6 +157,15 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .modal-submit{width:100%;background:#c8a200;border:none;border-radius:8px;color:#111;font-size:15px;font-weight:700;padding:11px;cursor:pointer}
 .modal-submit:hover{background:#e6bb00}
 .modal-submit:disabled{opacity:.5;cursor:not-allowed}
+/* Winner modal */
+#modal-winner{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,.5)}
+#modal-winner.hidden{display:none}
+.winner-box{background:linear-gradient(135deg,#7a5c00,#c8a200,#ffe066,#c8a200,#7a5c00);border:3px solid #ffd700;border-radius:20px;padding:32px 48px;text-align:center;box-shadow:0 0 60px rgba(255,215,0,.6),0 0 120px rgba(255,215,0,.3);animation:winnerPop .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes winnerPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.winner-title{font-size:52px;font-weight:900;color:#111;text-shadow:0 2px 0 rgba(0,0,0,.3);letter-spacing:.05em;line-height:1}
+.winner-amount{font-size:36px;font-weight:700;color:#111;margin-top:8px}
+.winner-tap{font-size:14px;color:rgba(0,0,0,.5);margin-top:16px;letter-spacing:.05em}
+/* Top bar */
 #top-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.4);border-radius:10px;margin-bottom:8px}
 #top-bar-user{font-size:13px;color:rgba(255,255,255,.6)}
 #top-bar-user span{color:#ffe066;font-weight:600}
@@ -163,6 +173,16 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 .top-bar-btn:hover{background:rgba(255,255,255,.15)}
 .top-bar-btn.gold{border-color:rgba(255,215,0,.4);color:#ffd700}
 .top-bar-btn.gold:hover{background:rgba(255,215,0,.15)}
+/* C C&E E circles */
+.prop-circle{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.3);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s;position:relative;flex-shrink:0}
+.prop-circle:hover{background:rgba(255,255,255,.15)}
+.prop-circle.active{background:rgba(255,215,0,.28);border-color:#ffd700}
+.prop-circle-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+.prop-circle-wrap:hover .prop-stk{opacity:1}
+.prop-stk{font-size:9px;color:#ffd700;margin-top:2px;min-height:12px;opacity:0;transition:opacity .15s}
+.prop-circle-wrap:hover .mbtn-circle.vis{display:block}
+.mbtn-circle{display:none;position:absolute;top:-4px;right:-4px;width:14px;height:14px;border-radius:50%;background:rgba(120,0,0,.8);border:0.5px solid rgba(255,80,80,.4);color:#fff;font-size:10px;line-height:13px;text-align:center;cursor:pointer;z-index:4;padding:0}
+.mbtn-circle:hover{background:rgba(180,0,0,.9)}
 </style>
 </head>
 <body>
@@ -191,6 +211,16 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
     </div>
   </div>
 
+  <!-- Winner modal -->
+  <div id="modal-winner" class="hidden" onclick="closeWinnerModal()">
+    <div class="winner-box" onclick="event.stopPropagation();closeWinnerModal()">
+      <div class="winner-title">🎉 WINNER!</div>
+      <div class="winner-amount" id="winner-amount">$0.00</div>
+      <div class="winner-tap">tap anywhere to dismiss</div>
+    </div>
+  </div>
+
+  <!-- Odds modal -->
   <div class="modal-overlay hidden" id="modal-odds">
     <div class="modal-box">
       <div class="modal-title" id="modal-odds-title">Place Odds</div>
@@ -200,6 +230,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
     </div>
   </div>
 
+  <!-- Move modal -->
   <div class="modal-overlay hidden" id="modal-move">
     <div class="modal-box">
       <div class="modal-title" id="modal-move-title">Move Bet</div>
@@ -209,6 +240,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
     </div>
   </div>
 
+  <!-- Redeem modal -->
   <div class="modal-overlay hidden" id="modal-redeem">
     <div class="modal-box dark">
       <div class="modal-title" id="redeem-title">Redeem a Code</div>
@@ -222,6 +254,8 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 
   <div class="felt">
     <div class="log" id="log"><p class="info">Crapless Craps — only 7 wins on come-out. Come odds are OFF by default.</p></div>
+
+    <!-- HUD -->
     <div style="display:flex;gap:7px;margin-bottom:8px;align-items:stretch">
       <div class="hud-card" style="display:flex;gap:12px;align-items:center">
         <div><div class="hud-label">Playable</div><div class="hud-val" style="color:#ffe066" id="bankroll">$0.00</div></div>
@@ -229,7 +263,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
         <div><div class="hud-label">Bet</div><div class="hud-val" style="color:#ffd700" id="total-bet">$0.00</div></div>
       </div>
       <div class="hud-card" style="flex:2">
-        <div class="hud-label">Roll history · newest left</div>
+        <div class="hud-label">Roll History</div>
         <div class="roll-history" id="roll-history"></div>
       </div>
       <div class="hud-card" style="display:flex;gap:12px;align-items:center">
@@ -238,6 +272,8 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
         <div><div class="hud-label">Last Win</div><div class="hud-val" style="color:#7ee87e" id="last-win">—</div></div>
       </div>
     </div>
+
+    <!-- Chips + Dice -->
     <div class="bgrp" style="margin-bottom:8px">
       <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">
         <div class="chip" style="background:#b0b0b0;color:#222;border-color:#888" data-val="1" onclick="selectChip(1)">$1</div>
@@ -258,26 +294,32 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
         <button class="roll-btn" id="roll-btn" onclick="rollDice()">Roll</button>
       </div>
     </div>
+
+    <!-- Bonus Bets -->
     <div class="bgrp" style="margin-bottom:8px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
-        <div class="slabel" style="margin-bottom:0">Bonus Bets · All Tall Small</div>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45)">Bonus Bets · Lucky Roller</div>
         <div id="bonus-status" style="font-size:11px;color:rgba(255,200,0,.7);font-weight:500">Open after a 7</div>
       </div>
       <div class="bonus-grid">
-        <div class="bonus-box-wrap"><div class="bonus-box" id="bbonus-low" onclick="bonusBet('low')"><div class="bonus-header"><span class="bonus-title">Low Rolls</span><span class="bonus-payout">31 for 1</span></div><div class="bonus-body"><span class="bonus-stake" id="bstk-low"></span><div class="bonus-nums" id="bnums-low"></div><span class="bonus-note" id="bnote-low">Bet after a 7</span></div></div><button class="mbtn-bonus" id="mb-bonus-low" onclick="event.stopPropagation();bonusRemove('low')">−</button></div>
-        <div class="bonus-box-wrap"><div class="bonus-box" id="bbonus-all" onclick="bonusBet('all')"><div class="bonus-header"><span class="bonus-title">Roll'em All</span><span class="bonus-payout">156 for 1</span></div><div class="bonus-body"><span class="bonus-stake" id="bstk-all"></span><div style="font-size:11px;color:rgba(255,255,255,.4);text-align:center;min-height:22px;display:flex;align-items:center;justify-content:center;margin-bottom:4px">2–6 &amp; 8–12 before 7</div><span class="bonus-note" id="bnote-all">Bet after a 7</span></div></div><button class="mbtn-bonus" id="mb-bonus-all" onclick="event.stopPropagation();bonusRemove('all')">−</button></div>
-        <div class="bonus-box-wrap"><div class="bonus-box" id="bbonus-high" onclick="bonusBet('high')"><div class="bonus-header"><span class="bonus-title">High Rolls</span><span class="bonus-payout">31 for 1</span></div><div class="bonus-body"><span class="bonus-stake" id="bstk-high"></span><div class="bonus-nums" id="bnums-high"></div><span class="bonus-note" id="bnote-high">Bet after a 7</span></div></div><button class="mbtn-bonus" id="mb-bonus-high" onclick="event.stopPropagation();bonusRemove('high')">−</button></div>
+        <div class="bonus-box-wrap"><div class="bonus-box" id="bbonus-low" onclick="bonusBet('low')"><div class="bonus-header"><span class="bonus-title">Low Rolls</span><span class="bonus-payout">31 for 1</span></div><div class="bonus-body"><div class="bonus-nums" id="bnums-low"></div><span class="bonus-stake" id="bstk-low"></span><span class="bonus-note" id="bnote-low">Bet after a 7</span></div></div><button class="mbtn-bonus" id="mb-bonus-low" onclick="event.stopPropagation();bonusRemove('low')">−</button></div>
+        <div class="bonus-box-wrap"><div class="bonus-box" id="bbonus-all" onclick="bonusBet('all')"><div class="bonus-header"><span class="bonus-title">Roll'em All</span><span class="bonus-payout">156 for 1</span></div><div class="bonus-body"><div style="font-size:11px;color:rgba(255,255,255,.4);text-align:center;display:flex;align-items:center;justify-content:center;margin-top:4px">2–6 &amp; 8–12 before 7</div><span class="bonus-stake" id="bstk-all"></span><span class="bonus-note" id="bnote-all">Bet after a 7</span></div></div><button class="mbtn-bonus" id="mb-bonus-all" onclick="event.stopPropagation();bonusRemove('all')">−</button></div>
+        <div class="bonus-box-wrap"><div class="bonus-box" id="bbonus-high" onclick="bonusBet('high')"><div class="bonus-header"><span class="bonus-title">High Rolls</span><span class="bonus-payout">31 for 1</span></div><div class="bonus-body"><div class="bonus-nums" id="bnums-high"></div><span class="bonus-stake" id="bstk-high"></span><span class="bonus-note" id="bnote-high">Bet after a 7</span></div></div><button class="mbtn-bonus" id="mb-bonus-high" onclick="event.stopPropagation();bonusRemove('high')">−</button></div>
       </div>
     </div>
+
+    <!-- Number strip -->
     <div class="bgrp" style="margin-bottom:8px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <div class="slabel" style="margin-bottom:0">Place / Buy · 2–12 · Crapless Craps</div>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45)">Place / Buy · 2–12</div>
         <div id="bets-status" style="font-size:11px;color:rgba(255,200,0,.7);font-weight:500">OFF on come-out</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:3px;height:22px" id="puck-row"></div>
       <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:4px" id="num-strip"></div>
     </div>
+
     <div style="display:flex;gap:7px">
+      <!-- LEFT COLUMN -->
       <div class="col-left">
         <div class="bgrp" style="margin-bottom:8px">
           <div style="display:flex;gap:5px;margin-bottom:7px">
@@ -295,77 +337,112 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
           <div id="panel-hop" style="display:none">
             <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:5px">31:1 hard · 16:1 easy · one roll</div>
             <div class="g3" style="gap:4px">
-              <div class="bwrap"><div class="bb" id="bet-hop11" onclick="placeBet('hop11')">1-1<span class="stk" id="stk-hop11"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop11" onclick="removeBet('hop11')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop12" onclick="placeBet('hop12')">1-2<span class="stk" id="stk-hop12"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop12" onclick="removeBet('hop12')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop13" onclick="placeBet('hop13')">1-3<span class="stk" id="stk-hop13"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop13" onclick="removeBet('hop13')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop14" onclick="placeBet('hop14')">1-4<span class="stk" id="stk-hop14"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop14" onclick="removeBet('hop14')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop15" onclick="placeBet('hop15')">1-5<span class="stk" id="stk-hop15"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop15" onclick="removeBet('hop15')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop16" onclick="placeBet('hop16')">1-6<span class="stk" id="stk-hop16"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop16" onclick="removeBet('hop16')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop22" onclick="placeBet('hop22')">2-2<span class="stk" id="stk-hop22"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop22" onclick="removeBet('hop22')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop23" onclick="placeBet('hop23')">2-3<span class="stk" id="stk-hop23"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop23" onclick="removeBet('hop23')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop24" onclick="placeBet('hop24')">2-4<span class="stk" id="stk-hop24"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop24" onclick="removeBet('hop24')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop25" onclick="placeBet('hop25')">2-5<span class="stk" id="stk-hop25"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop25" onclick="removeBet('hop25')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop26" onclick="placeBet('hop26')">2-6<span class="stk" id="stk-hop26"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop26" onclick="removeBet('hop26')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop33" onclick="placeBet('hop33')">3-3<span class="stk" id="stk-hop33"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop33" onclick="removeBet('hop33')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop34" onclick="placeBet('hop34')">3-4<span class="stk" id="stk-hop34"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop34" onclick="removeBet('hop34')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop35" onclick="placeBet('hop35')">3-5<span class="stk" id="stk-hop35"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop35" onclick="removeBet('hop35')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop36" onclick="placeBet('hop36')">3-6<span class="stk" id="stk-hop36"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop36" onclick="removeBet('hop36')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop44" onclick="placeBet('hop44')">4-4<span class="stk" id="stk-hop44"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop44" onclick="removeBet('hop44')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop45" onclick="placeBet('hop45')">4-5<span class="stk" id="stk-hop45"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop45" onclick="removeBet('hop45')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop46" onclick="placeBet('hop46')">4-6<span class="stk" id="stk-hop46"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop46" onclick="removeBet('hop46')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop55" onclick="placeBet('hop55')">5-5<span class="stk" id="stk-hop55"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop55" onclick="removeBet('hop55')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop56" onclick="placeBet('hop56')">5-6<span class="stk" id="stk-hop56"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop56" onclick="removeBet('hop56')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-hop66" onclick="placeBet('hop66')">6-6<span class="stk" id="stk-hop66"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop66" onclick="removeBet('hop66')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop11" onclick="placeBet('hop11')"><span style="font-size:26px">⚀⚀</span><span class="stk" id="stk-hop11"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop11" onclick="removeBet('hop11')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop12" onclick="placeBet('hop12')"><span style="font-size:26px">⚀⚁</span><span class="stk" id="stk-hop12"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop12" onclick="removeBet('hop12')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop13" onclick="placeBet('hop13')"><span style="font-size:26px">⚀⚂</span><span class="stk" id="stk-hop13"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop13" onclick="removeBet('hop13')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop14" onclick="placeBet('hop14')"><span style="font-size:26px">⚀⚃</span><span class="stk" id="stk-hop14"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop14" onclick="removeBet('hop14')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop15" onclick="placeBet('hop15')"><span style="font-size:26px">⚀⚄</span><span class="stk" id="stk-hop15"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop15" onclick="removeBet('hop15')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop16" onclick="placeBet('hop16')"><span style="font-size:26px">⚀⚅</span><span class="stk" id="stk-hop16"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop16" onclick="removeBet('hop16')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop22" onclick="placeBet('hop22')"><span style="font-size:26px">⚁⚁</span><span class="stk" id="stk-hop22"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop22" onclick="removeBet('hop22')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop23" onclick="placeBet('hop23')"><span style="font-size:26px">⚁⚂</span><span class="stk" id="stk-hop23"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop23" onclick="removeBet('hop23')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop24" onclick="placeBet('hop24')"><span style="font-size:26px">⚁⚃</span><span class="stk" id="stk-hop24"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop24" onclick="removeBet('hop24')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop25" onclick="placeBet('hop25')"><span style="font-size:26px">⚁⚄</span><span class="stk" id="stk-hop25"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop25" onclick="removeBet('hop25')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop26" onclick="placeBet('hop26')"><span style="font-size:26px">⚁⚅</span><span class="stk" id="stk-hop26"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop26" onclick="removeBet('hop26')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop33" onclick="placeBet('hop33')"><span style="font-size:26px">⚂⚂</span><span class="stk" id="stk-hop33"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop33" onclick="removeBet('hop33')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop34" onclick="placeBet('hop34')"><span style="font-size:26px">⚂⚃</span><span class="stk" id="stk-hop34"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop34" onclick="removeBet('hop34')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop35" onclick="placeBet('hop35')"><span style="font-size:26px">⚂⚄</span><span class="stk" id="stk-hop35"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop35" onclick="removeBet('hop35')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop36" onclick="placeBet('hop36')"><span style="font-size:26px">⚂⚅</span><span class="stk" id="stk-hop36"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop36" onclick="removeBet('hop36')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop44" onclick="placeBet('hop44')"><span style="font-size:26px">⚃⚃</span><span class="stk" id="stk-hop44"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop44" onclick="removeBet('hop44')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop45" onclick="placeBet('hop45')"><span style="font-size:26px">⚃⚄</span><span class="stk" id="stk-hop45"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop45" onclick="removeBet('hop45')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop46" onclick="placeBet('hop46')"><span style="font-size:26px">⚃⚅</span><span class="stk" id="stk-hop46"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop46" onclick="removeBet('hop46')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop55" onclick="placeBet('hop55')"><span style="font-size:26px">⚄⚄</span><span class="stk" id="stk-hop55"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop55" onclick="removeBet('hop55')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop56" onclick="placeBet('hop56')"><span style="font-size:26px">⚄⚅</span><span class="stk" id="stk-hop56"></span><span class="pay">16:1</span></div><button class="mbtn" id="m-hop56" onclick="removeBet('hop56')">−</button></div>
+              <div class="bwrap"><div class="bb" id="bet-hop66" onclick="placeBet('hop66')"><span style="font-size:26px">⚅⚅</span><span class="stk" id="stk-hop66"></span><span class="pay">31:1</span></div><button class="mbtn" id="m-hop66" onclick="removeBet('hop66')">−</button></div>
             </div>
           </div>
         </div>
+        <!-- One roll props -->
         <div class="bgrp">
-          <div class="slabel">One roll props</div>
           <div style="display:flex;flex-direction:column;gap:5px">
             <div class="bwrap"><div class="bb" id="bet-any7" onclick="placeBet('any7')" style="background:rgba(200,0,0,.2);border-color:rgba(255,80,80,.35)"><span style="font-size:15px;font-weight:700">Seven</span><span class="stk" id="stk-any7"></span><span class="pay">5 for 1</span></div><button class="mbtn" id="m-any7" onclick="removeBet('any7')">−</button></div>
-            <div class="bwrap"><div class="bb" id="bet-horn" onclick="placeBet('horn')">Horn Bet<span class="stk" id="stk-horn"></span><span class="pay">2&amp;12: 31:1 · 3&amp;11: 16:1</span></div><button class="mbtn" id="m-horn" onclick="removeBet('horn')">−</button></div>
-            <div class="g2" style="gap:5px">
-              <div class="bwrap"><div class="bb" id="bet-midnight" onclick="placeBet('midnight')"><span class="dice-pair">⚅⚅</span><span class="stk" id="stk-midnight"></span><span class="pay">31 for 1</span></div><button class="mbtn" id="m-midnight" onclick="removeBet('midnight')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-aces" onclick="placeBet('aces')"><span class="dice-pair">⚀⚀</span><span class="stk" id="stk-aces"></span><span class="pay">31 for 1</span></div><button class="mbtn" id="m-aces" onclick="removeBet('aces')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-ace2" onclick="placeBet('ace2')"><span class="dice-pair">⚀⚁</span><span class="stk" id="stk-ace2"></span><span class="pay">16 for 1</span></div><button class="mbtn" id="m-ace2" onclick="removeBet('ace2')">−</button></div>
-              <div class="bwrap"><div class="bb" id="bet-yo" onclick="placeBet('yo')"><span class="dice-pair">⚄⚅</span><span class="stk" id="stk-yo"></span><span class="pay">16 for 1</span></div><button class="mbtn" id="m-yo" onclick="removeBet('yo')">−</button></div>
+            <div class="bwrap"><div class="bb" id="bet-horn" onclick="placeBet('horn')"><span style="font-size:56px;line-height:1;display:block">⚀⚁⚄⚅</span>Horn<span class="stk" id="stk-horn"></span></div><button class="mbtn" id="m-horn" onclick="removeBet('horn')">−</button></div>
+            <div class="bwrap"><div class="bb" id="bet-midnight" onclick="placeBet('midnight')"><span class="dice-pair">⚅⚅</span><span class="stk" id="stk-midnight"></span><span class="pay">31 for 1</span></div><button class="mbtn" id="m-midnight" onclick="removeBet('midnight')">−</button></div>
+            <div class="bwrap"><div class="bb" id="bet-aces" onclick="placeBet('aces')"><span class="dice-pair">⚀⚀</span><span class="stk" id="stk-aces"></span><span class="pay">31 for 1</span></div><button class="mbtn" id="m-aces" onclick="removeBet('aces')">−</button></div>
+            <div class="bwrap"><div class="bb" id="bet-ace2" onclick="placeBet('ace2')"><span class="dice-pair">⚀⚁</span><span class="stk" id="stk-ace2"></span><span class="pay">16 for 1</span></div><button class="mbtn" id="m-ace2" onclick="removeBet('ace2')">−</button></div>
+            <div class="bwrap"><div class="bb" id="bet-yo" onclick="placeBet('yo')"><span class="dice-pair">⚄⚅</span><span class="stk" id="stk-yo"></span><span class="pay">16 for 1</span></div><button class="mbtn" id="m-yo" onclick="removeBet('yo')">−</button></div>
+            <!-- C C&E E circles -->
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:2px">
+              <div class="prop-circle-wrap">
+                <div class="prop-circle" id="bet-anyCraps" onclick="placeBet('anyCraps')">C</div>
+                <div class="prop-stk" id="stk-anyCraps"></div>
+                <button class="mbtn-circle" id="m-anyCraps" onclick="removeBet('anyCraps')">−</button>
+              </div>
+              <div class="prop-circle-wrap">
+                <div class="prop-circle" id="bet-cande" onclick="placeBet('cande')">C&amp;E</div>
+                <div class="prop-stk" id="stk-cande"></div>
+                <button class="mbtn-circle" id="m-cande" onclick="removeBet('cande')">−</button>
+              </div>
+              <div class="prop-circle-wrap">
+                <div class="prop-circle" id="bet-eleven" onclick="placeBet('eleven')">E</div>
+                <div class="prop-stk" id="stk-eleven"></div>
+                <button class="mbtn-circle" id="m-eleven" onclick="removeBet('eleven')">−</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- RIGHT COLUMN -->
       <div class="col-right">
-        <div class="bgrp" style="margin-bottom:8px">
-          <div class="slabel">Field bets</div>
-          <div class="bwrap" style="margin-bottom:5px"><div class="bb" id="bet-field" onclick="placeBet('field')" style="padding:8px 6px;background:rgba(80,50,0,.3);border-color:rgba(255,200,0,.3)"><div style="font-size:12px;color:rgba(255,255,255,.7)">2 · 3 · 4 · 9 · 10 · 11 · 12</div><div style="font-size:15px;font-weight:700;margin-top:2px">Field</div><span class="stk" id="stk-field"></span><span class="pay">1:1 · 2x on 2 · 3x on 12</span></div><button class="mbtn" id="m-field" onclick="removeBet('field')">−</button></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
-            <div class="bwrap"><div class="bb" id="bet-lowfield" onclick="placeBet('lowfield')" style="padding:7px 5px"><div style="font-size:13px;color:rgba(255,255,255,.7)">2 · 3 · 4</div><div style="font-size:14px;font-weight:700;margin-top:2px">Low Field</div><span class="stk" id="stk-lowfield"></span><span class="pay">2 for 1</span></div><button class="mbtn" id="m-lowfield" onclick="removeBet('lowfield')">−</button></div>
-            <div class="bwrap"><div class="bb" id="bet-highfield" onclick="placeBet('highfield')" style="padding:7px 5px;background:rgba(200,100,0,.2);border-color:rgba(255,180,0,.35)"><div style="font-size:13px;color:rgba(255,255,255,.7)">10 · 11 · 12</div><div style="font-size:14px;font-weight:700;margin-top:2px">High Field</div><span class="stk" id="stk-highfield"></span><span class="pay">2 for 1</span></div><button class="mbtn" id="m-highfield" onclick="removeBet('highfield')">−</button></div>
+        <!-- Field + Shortcuts side by side -->
+        <div style="display:flex;gap:7px;margin-bottom:8px">
+          <!-- Field bets (half width) -->
+          <div class="bgrp" style="flex:1;margin-bottom:0">
+            <div class="bwrap" style="margin-bottom:5px">
+              <div class="bb" id="bet-field" onclick="placeBet('field')" style="padding:8px 6px;background:rgba(80,50,0,.3);border-color:rgba(255,200,0,.3)">
+                <div style="font-size:11px;color:rgba(255,255,255,.7)">2·3·4·9·10·11·12</div>
+                <div style="font-size:14px;font-weight:700;margin-top:2px">Field</div>
+                <span class="stk" id="stk-field"></span>
+                <span class="pay">1:1 · 2x on 2 · 3x on 12</span>
+              </div><button class="mbtn" id="m-field" onclick="removeBet('field')">−</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+              <div class="bwrap">
+                <div class="bb" id="bet-lowfield" onclick="placeBet('lowfield')" style="padding:6px 4px">
+                  <div style="font-size:11px;color:rgba(255,255,255,.7)">2·3·4</div>
+                  <div style="font-size:12px;font-weight:700;margin-top:1px">Low</div>
+                  <span class="stk" id="stk-lowfield"></span>
+                  <span class="pay">2 for 1</span>
+                </div><button class="mbtn" id="m-lowfield" onclick="removeBet('lowfield')">−</button>
+              </div>
+              <div class="bwrap">
+                <div class="bb" id="bet-highfield" onclick="placeBet('highfield')" style="padding:6px 4px;background:rgba(200,100,0,.2);border-color:rgba(255,180,0,.35)">
+                  <div style="font-size:11px;color:rgba(255,255,255,.7)">10·11·12</div>
+                  <div style="font-size:12px;font-weight:700;margin-top:1px">High</div>
+                  <span class="stk" id="stk-highfield"></span>
+                  <span class="pay">2 for 1</span>
+                </div><button class="mbtn" id="m-highfield" onclick="removeBet('highfield')">−</button>
+              </div>
+            </div>
+          </div>
+          <!-- Shortcuts (right of field) -->
+          <div class="bgrp" style="flex:1;margin-bottom:0;display:flex;flex-direction:column;gap:5px;justify-content:space-between">
+            <button class="shortcut-btn" id="beton-btn" onclick="toggleBetsOn()">Set Bets On</button>
+            <button class="shortcut-btn" onclick="pressAll()">Press</button>
+            <button class="shortcut-btn" onclick="acrossAll()">Across</button>
+            <button class="shortcut-btn" id="double-btn" onclick="doubleBet()">Double Bet</button>
+            <button class="shortcut-btn" id="repeat-btn" onclick="repeatLastBet()" disabled>Repeat Last Bet</button>
+            <button class="shortcut-btn" onclick="clearRemovable()" style="border-color:rgba(255,100,100,.4)">Clear</button>
           </div>
         </div>
+
+        <!-- Come -->
         <div class="bgrp" style="margin-bottom:8px">
-          <div class="slabel">One roll</div>
-          <div class="g3" style="gap:5px">
-            <div class="bwrap"><div class="bb" id="bet-anyCraps" onclick="placeBet('anyCraps')" style="font-size:14px;font-weight:600;padding:8px 5px">C<br><span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.6)">Any Craps</span><span class="stk" id="stk-anyCraps"></span><span class="pay">8 for 1</span></div><button class="mbtn" id="m-anyCraps" onclick="removeBet('anyCraps')">−</button></div>
-            <div class="bwrap"><div class="bb" id="bet-cande" onclick="placeBet('cande')" style="font-size:14px;font-weight:600;padding:8px 5px">C&amp;E<br><span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.6)">Craps &amp; Eleven</span><span class="stk" id="stk-cande"></span></div><button class="mbtn" id="m-cande" onclick="removeBet('cande')">−</button></div>
-            <div class="bwrap"><div class="bb" id="bet-eleven" onclick="placeBet('eleven')" style="font-size:14px;font-weight:600;padding:8px 5px">E<br><span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.6)">Eleven</span><span class="stk" id="stk-eleven"></span><span class="pay">16 for 1</span></div><button class="mbtn" id="m-eleven" onclick="removeBet('eleven')">−</button></div>
-          </div>
-        </div>
-        <div class="bgrp" style="margin-bottom:8px">
-          <div style="display:flex;gap:5px;flex-wrap:wrap">
-            <button class="shortcut-btn" id="beton-btn" onclick="toggleBetsOn()" style="flex:1">Set Bets On</button>
-            <button class="shortcut-btn" onclick="pressAll()" style="flex:1">Press</button>
-            <button class="shortcut-btn" onclick="acrossAll()" style="flex:1">Across</button>
-            <button class="shortcut-btn" id="double-btn" onclick="doubleBet()" style="flex:1">Double Bet</button>
-            <button class="shortcut-btn" id="repeat-btn" onclick="repeatLastBet()" style="flex:1" disabled>Repeat Last Bet</button>
-            <button class="shortcut-btn" onclick="clearRemovable()" style="flex:1;border-color:rgba(255,100,100,.4)">Clear</button>
-          </div>
-        </div>
-        <div class="bgrp" style="margin-bottom:8px">
-          <div class="slabel">Come</div>
           <div class="line-bar"><div class="line-bar-main" id="come-main-zone" onclick="placeBet('come')"><span class="line-label">COME</span><span class="line-stk" id="stk-come"></span></div></div>
         </div>
+
+        <!-- Pass Line -->
         <div class="bgrp">
-          <div class="slabel">Pass Line</div>
           <div class="pass-bar">
             <div class="pass-odds-cell" id="pass-odds-cell" onclick="openPassOddsManual()"><span class="odds-label">ODDS</span><span class="odds-stk" id="stk-passodds"></span><span class="odds-pay-lbl" id="po-limit">—</span></div>
             <div class="line-bar-main" id="pass-main-zone" onclick="placeBet('pass')"><span class="line-label">PASS LINE</span><span class="line-stk" id="stk-pass"></span><span class="line-note" id="lk-pass"></span></div>
@@ -373,6 +450,7 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
         </div>
       </div>
     </div>
+
     <div class="pnl-footer">
       <span style="font-size:12px;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase">Net P&amp;L</span>
       <span style="font-size:20px;font-weight:600" id="sn">$0.00</span>
@@ -381,7 +459,6 @@ body{font-family:system-ui,sans-serif;background:#111;color:#fff;min-height:100v
 </div>
 
 <script>
-// ── SUPABASE ──────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://qgiksiauptrqmxsupwqe.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_4J7VSDzSm3cA3aWHF7hAEg_gC1BKOp_';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -393,6 +470,7 @@ const ODDS_MULT={2:1,3:2,4:3,5:4,6:5,8:5,9:4,10:3,11:2,12:1};
 const ODDS_LABEL={2:'6:1',3:'3:1',4:'2:1',5:'3:2',6:'6:5',8:'6:5',9:'3:2',10:'2:1',11:'3:1',12:'6:1'};
 const NUM_DEFS={2:{label:'2',place:[25,5],buyRatio:6,buyLabel:'6:1−5%'},3:{label:'3',place:[13,5],buyRatio:3,buyLabel:'3:1−5%'},4:{label:'4',place:[9,5],buyRatio:2,buyLabel:'2:1−5%'},5:{label:'5',place:[7,5],buyRatio:1.5,buyLabel:'3:2−5%'},6:{label:'Six',place:[7,6],buyRatio:6/5,buyLabel:'6:5−5%'},8:{label:'8',place:[7,6],buyRatio:6/5,buyLabel:'6:5−5%'},9:{label:'Nine',place:[7,5],buyRatio:1.5,buyLabel:'3:2−5%'},10:{label:'10',place:[9,5],buyRatio:2,buyLabel:'2:1−5%'},11:{label:'11',place:[13,5],buyRatio:3,buyLabel:'3:1−5%'},12:{label:'12',place:[25,5],buyRatio:6,buyLabel:'6:1−5%'}};
 const ALL_NUMS=[2,3,4,5,6,8,9,10,11,12];
+const ALL_BOX_NUMS=[2,3,4,5,6,8,9,10,11,12];
 const INNER_NUMS=[4,5,6,8,9,10];
 const HARD_NUMS=new Set([4,6,8,10]);
 const LOW_NUMS=[2,3,4,5,6],HIGH_NUMS=[8,9,10,11,12],ALL_BONUS=[2,3,4,5,6,8,9,10,11,12];
@@ -415,6 +493,7 @@ const ANIM_MS=1150;
 let tgt1,tgt2,src1,src2,onDone=null;
 let die1,die2,renderer,scene,camera;
 let THREE=null;
+let winnerTimer=null;
 
 function tBets(){let t=Object.values(G.bets).reduce((a,b)=>r2(a+b),0);G.comeBets.forEach(c=>{t=r2(t+c.flat+(c.odds||0));});return r2(t+G.bonus.low+G.bonus.all+G.bonus.high);}
 function calcNet(){return r2(G.bankroll+tBets()-G.startingBankroll);}
@@ -425,6 +504,19 @@ function snap(){const b={};for(const k in G.bets)if(!CONTRACT.has(k))b[k]=G.bets
 function chkRepeat(){if(!G.snapshot){G.canRepeat=false;return;}for(const k in G.snapshot.bets){if((G.bets[k]||0)<G.snapshot.bets[k]){G.canRepeat=true;return;}}for(const s of G.snapshot.comeBets){if(!G.comeBets.find(c=>c.num===s.num&&Math.abs(c.flat-s.flat)<.01)){G.canRepeat=true;return;}}G.canRepeat=false;}
 function checkBroke(){if(G.bankroll<=0&&tBets()===0){setTimeout(()=>openRedeemModal(true),300);}}
 
+// ── WINNER MODAL ──────────────────────────────────────────────────────────────
+function showWinnerModal(amount){
+  if(amount<=0)return;
+  if(winnerTimer)clearTimeout(winnerTimer);
+  document.getElementById('winner-amount').textContent=fmt(amount)+' returned';
+  document.getElementById('modal-winner').classList.remove('hidden');
+  winnerTimer=setTimeout(closeWinnerModal,2000);
+}
+function closeWinnerModal(){
+  document.getElementById('modal-winner').classList.add('hidden');
+  if(winnerTimer){clearTimeout(winnerTimer);winnerTimer=null;}
+}
+
 // ── AUTH ──────────────────────────────────────────────────────────────────────
 function showTab(tab){
   _authMode=tab;
@@ -433,7 +525,6 @@ function showTab(tab){
   document.getElementById('auth-btn').textContent=tab==='login'?'Log In':'Create Account';
   document.getElementById('auth-error').style.display='none';
 }
-
 function showAuthError(msg){const el=document.getElementById('auth-error');el.textContent=msg;el.style.display='block';}
 
 async function handleAuth(){
@@ -442,34 +533,23 @@ async function handleAuth(){
   if(!username||!password){showAuthError('Please enter a username and password.');return;}
   const btn=document.getElementById('auth-btn');
   btn.disabled=true;btn.textContent='Please wait...';
-  try{
-    if(_authMode==='register')await registerPlayer(username,password);
-    else await loginPlayer(username,password);
-  }catch(e){showAuthError(e.message||'Something went wrong.');}
-  btn.disabled=false;
-  btn.textContent=_authMode==='login'?'Log In':'Create Account';
+  try{if(_authMode==='register')await registerPlayer(username,password);else await loginPlayer(username,password);}
+  catch(e){showAuthError(e.message||'Something went wrong.');}
+  btn.disabled=false;btn.textContent=_authMode==='login'?'Log In':'Create Account';
 }
 
-async function hashPassword(password){
-  const enc=new TextEncoder().encode(password);
-  const buf=await crypto.subtle.digest('SHA-256',enc);
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-function generateToken(){
-  return Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+async function hashPassword(p){const e=new TextEncoder().encode(p);const b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+function generateToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');}
 
 async function registerPlayer(username,password){
-  const{data:existing}=await sb.from('players').select('id').eq('username',username).maybeSingle();
-  if(existing)throw new Error('That username is already taken.');
+  const{data:ex}=await sb.from('players').select('id').eq('username',username).maybeSingle();
+  if(ex)throw new Error('That username is already taken.');
   const hash=await hashPassword(password);
   const token=generateToken();
   const expires=new Date(Date.now()+30*24*60*60*1000).toISOString();
   const{data,error}=await sb.from('players').insert({username,password_hash:hash,bankroll:0,net_pnl:0,session_token:token,session_expires:expires}).select().single();
   if(error)throw new Error('Could not create account: '+error.message);
-  localStorage.setItem('craps_session',token);
-  startSession(data);
+  localStorage.setItem('craps_session',token);startSession(data);
 }
 
 async function loginPlayer(username,password){
@@ -480,13 +560,11 @@ async function loginPlayer(username,password){
   const token=generateToken();
   const expires=new Date(Date.now()+30*24*60*60*1000).toISOString();
   await sb.from('players').update({session_token:token,session_expires:expires}).eq('id',data.id);
-  localStorage.setItem('craps_session',token);
-  startSession({...data,session_token:token,session_expires:expires});
+  localStorage.setItem('craps_session',token);startSession({...data,session_token:token,session_expires:expires});
 }
 
 async function tryRestoreSession(){
-  const token=localStorage.getItem('craps_session');
-  if(!token)return;
+  const token=localStorage.getItem('craps_session');if(!token)return;
   const{data,error}=await sb.from('players').select('*').eq('session_token',token).maybeSingle();
   if(error||!data){localStorage.removeItem('craps_session');return;}
   if(new Date(data.session_expires)<new Date()){localStorage.removeItem('craps_session');return;}
@@ -502,19 +580,15 @@ function startSession(player){
   G.bankroll=parseFloat(player.bankroll)||0;
   G.startingBankroll=G.bankroll;
   G.bankrollAfterLastRoll=G.bankroll;
-  updateUI();
-  initDice();
+  updateUI();initDice();
 }
 
 async function logout(){
   if(currentPlayer)await sb.from('players').update({session_token:null,session_expires:null}).eq('id',currentPlayer.id);
-  localStorage.removeItem('craps_session');
-  currentPlayer=null;
-  G=makeInitialG();
+  localStorage.removeItem('craps_session');currentPlayer=null;G=makeInitialG();
   document.getElementById('game-screen').style.display='none';
   document.getElementById('auth-screen').style.display='flex';
-  document.getElementById('auth-username').value='';
-  document.getElementById('auth-password').value='';
+  document.getElementById('auth-username').value='';document.getElementById('auth-password').value='';
 }
 
 // ── REDEEM ────────────────────────────────────────────────────────────────────
@@ -523,25 +597,16 @@ function openRedeemModal(broke){
   document.getElementById('redeem-error').textContent='';
   document.getElementById('redeem-btn').disabled=false;
   document.getElementById('redeem-btn').textContent='Redeem';
-  if(broke){
-    document.getElementById('redeem-title').textContent='Out of Chips!';
-    document.getElementById('redeem-sub').textContent='Get a code from Deck to continue playing.';
-    document.getElementById('redeem-cancel').style.display='none';
-  }else{
-    document.getElementById('redeem-title').textContent='Redeem a Code';
-    document.getElementById('redeem-sub').textContent='Enter the code Deck sent you to add chips.';
-    document.getElementById('redeem-cancel').style.display='block';
-  }
+  if(broke){document.getElementById('redeem-title').textContent='Out of Chips!';document.getElementById('redeem-sub').textContent='Get a code from Deck to continue playing.';document.getElementById('redeem-cancel').style.display='none';}
+  else{document.getElementById('redeem-title').textContent='Redeem a Code';document.getElementById('redeem-sub').textContent='Enter the code Deck sent you to add chips.';document.getElementById('redeem-cancel').style.display='block';}
   document.getElementById('modal-redeem').classList.remove('hidden');
 }
 function closeRedeemModal(){document.getElementById('modal-redeem').classList.add('hidden');}
 
 async function redeemCode(){
   const code=document.getElementById('redeem-input').value.trim().toUpperCase();
-  const errEl=document.getElementById('redeem-error');
-  const btn=document.getElementById('redeem-btn');
-  errEl.textContent='';
-  if(!code){errEl.textContent='Please enter a code.';return;}
+  const errEl=document.getElementById('redeem-error');const btn=document.getElementById('redeem-btn');
+  errEl.textContent='';if(!code){errEl.textContent='Please enter a code.';return;}
   btn.disabled=true;btn.textContent='Checking...';
   const{data:codeRow,error}=await sb.from('codes').select('*').eq('code',code).maybeSingle();
   if(error||!codeRow){errEl.textContent='Code not found.';btn.disabled=false;btn.textContent='Redeem';return;}
@@ -550,38 +615,32 @@ async function redeemCode(){
   const newStarting=r2(G.startingBankroll+parseFloat(codeRow.value));
   await sb.from('codes').update({used:true}).eq('id',codeRow.id);
   await sb.from('players').update({bankroll:newBankroll}).eq('id',currentPlayer.id);
-  G.bankroll=newBankroll;
-  G.startingBankroll=newStarting;
-  G.bankrollAfterLastRoll=newBankroll;
+  G.bankroll=newBankroll;G.startingBankroll=newStarting;G.bankrollAfterLastRoll=newBankroll;
   currentPlayer.bankroll=newBankroll;
-  closeRedeemModal();
-  addLog('Code redeemed! +'+fmt(codeRow.value)+' added to your bankroll.','win');
-  updateUI();
-  btn.disabled=false;btn.textContent='Redeem';
+  closeRedeemModal();addLog('Code redeemed! +'+fmt(codeRow.value)+' added to your bankroll.','win');
+  updateUI();btn.disabled=false;btn.textContent='Redeem';
 }
 
-// ── SAVE ──────────────────────────────────────────────────────────────────────
 async function saveToSupabase(){
   if(!currentPlayer)return;
-  const net=calcNet();
-  await sb.from('players').update({bankroll:G.bankroll,net_pnl:net}).eq('id',currentPlayer.id);
+  await sb.from('players').update({bankroll:G.bankroll,net_pnl:calcNet()}).eq('id',currentPlayer.id);
 }
 
-// ── DICE SETUP ────────────────────────────────────────────────────────────────
+// ── DICE ──────────────────────────────────────────────────────────────────────
 function initDice(){
-  if(renderer)return; // already initialized
-  THREE=window.THREE;
-  if(!THREE){console.error('THREE not loaded');return;}
+  if(renderer)return;
+  THREE=window.THREE;if(!THREE){console.error('THREE not loaded');return;}
   const W=220,H=110,cvs=document.getElementById('dice-canvas');
   renderer=new THREE.WebGLRenderer({canvas:cvs,antialias:true,alpha:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
   renderer.setSize(W,H);renderer.setClearColor(0,0);
   scene=new THREE.Scene();
+  // Camera below center, looking slightly upward — shows bottom face
   camera=new THREE.PerspectiveCamera(40,W/H,.1,100);
-  camera.position.set(0,1.8,6.5);camera.lookAt(0,0,0);
+  camera.position.set(0,-1.8,6.5);camera.lookAt(0,0,0);
   scene.add(new THREE.AmbientLight(0xffffff,.5));
-  const dl1=new THREE.DirectionalLight(0xffffff,.9);dl1.position.set(3,5,4);scene.add(dl1);
-  const dl2=new THREE.DirectionalLight(0x8899ff,.3);dl2.position.set(-2,-1,3);scene.add(dl2);
+  const dl1=new THREE.DirectionalLight(0xffffff,.9);dl1.position.set(3,-5,4);scene.add(dl1);
+  const dl2=new THREE.DirectionalLight(0x8899ff,.3);dl2.position.set(-2,1,3);scene.add(dl2);
   die1=makeDie(-1.2);die2=makeDie(1.2);
   tgt1=new THREE.Quaternion();tgt2=new THREE.Quaternion();
   src1=new THREE.Quaternion();src2=new THREE.Quaternion();
@@ -590,17 +649,19 @@ function initDice(){
 
 function pipTex(v){
   const S=128,c=document.createElement('canvas');c.width=c.height=S;
-  const ctx=c.getContext('2d');
-  ctx.fillStyle='#f4efe6';rrect(ctx,0,0,S,S,14);ctx.fill();
+  const ctx=c.getContext('2d');ctx.fillStyle='#f4efe6';rrect(ctx,0,0,S,S,14);ctx.fill();
   ctx.strokeStyle='#c8c0aa';ctx.lineWidth=3;rrect(ctx,1.5,1.5,S-3,S-3,13);ctx.stroke();
-  ctx.fillStyle='#7a1515';
-  pipXY(v,S).forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.fill();});
+  ctx.fillStyle='#7a1515';pipXY(v,S).forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.fill();});
   return new THREE.CanvasTexture(c);
 }
 function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
 function pipXY(v,S){const a=S*.21,c=S*.5,b=S-a;return({1:[[c,c]],2:[[a,a],[b,b]],3:[[a,a],[c,c],[b,b]],4:[[a,a],[b,a],[a,b],[b,b]],5:[[a,a],[b,a],[c,c],[a,b],[b,b]],6:[[a,a],[b,a],[a,c],[b,c],[a,b],[b,b]]})[v]||[];}
 const FMAT=[2,5,3,4,1,6];
 function makeDie(x){const m=FMAT.map(v=>new THREE.MeshPhongMaterial({map:pipTex(v),shininess:60}));const d=new THREE.Mesh(new THREE.BoxGeometry(1.5,1.5,1.5),m);d.position.x=x;scene.add(d);return d;}
+// Camera now looks from below — to show face V toward camera (+Z still faces camera direction)
+// Same quaternion table as before since we kept the same face→material mapping
+// Camera at (0,-1.8,6.5) looking at origin means forward vector is (0,1.8,-6.5) normalized
+// The face the camera sees is still approximately +Z of the die
 function tQ(v){const Q=new THREE.Quaternion(),PI=Math.PI,H=PI/2,m={1:new THREE.Euler(0,0,0),6:new THREE.Euler(0,PI,0),2:new THREE.Euler(0,-H,0),5:new THREE.Euler(0,H,0),3:new THREE.Euler(H,0,0),4:new THREE.Euler(-H,0,0)};Q.setFromEuler(m[v]||new THREE.Euler(0,0,0));return Q;}
 function eO(t){return 1-Math.pow(1-t,3);}
 function eIO(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
@@ -612,15 +673,13 @@ function startAnim(v1,v2,cb){
   document.getElementById('dice-sum-overlay').style.opacity='0';
 }
 function renderLoop(now){
-  requestAnimationFrame(renderLoop);
-  if(!renderer)return;
+  requestAnimationFrame(renderLoop);if(!renderer)return;
   if(animating){
     const t=Math.min((now-animStart)/ANIM_MS,1),sT=eIO(Math.min(t/.6,1)),seT=eO(Math.max((t-.5)/.5,0));
     const a1=new THREE.Vector3(.55,.82,.14).normalize(),a2=new THREE.Vector3(-.48,.75,.46).normalize();
     const s1=new THREE.Quaternion().setFromAxisAngle(a1,sT*Math.PI*6).multiply(src1);
     const s2=new THREE.Quaternion().setFromAxisAngle(a2,sT*Math.PI*5.4).multiply(src2);
-    die1.quaternion.slerpQuaternions(s1,tgt1,seT);
-    die2.quaternion.slerpQuaternions(s2,tgt2,seT);
+    die1.quaternion.slerpQuaternions(s1,tgt1,seT);die2.quaternion.slerpQuaternions(s2,tgt2,seT);
     if(t>=1){animating=false;die1.quaternion.copy(tgt1);die2.quaternion.copy(tgt2);if(onDone){onDone();onDone=null;}}
   }
   renderer.render(scene,camera);
@@ -652,7 +711,7 @@ function buildStrip(){
 }
 buildStrip();
 
-// ── ODDS MODAL ────────────────────────────────────────────────────────────────
+// ── MODALS ────────────────────────────────────────────────────────────────────
 function openOddsModal(type,cbIdx,flatAmt,num){
   oddsCtx={type,cbIdx,flatAmt,num};
   const lim=oddsLim(flatAmt,num),mult=ODDS_MULT[num]||1;
@@ -680,8 +739,6 @@ function openPassOddsManual(){if(!G.bets['pass']){addLog('Need Pass Line first.'
 function openComeOddsModal(idx){const cb=G.comeBets[idx];if(!cb)return;const cur=cb.odds||0,lim=oddsLim(cb.flat,cb.num);if(r2(cur)>=r2(lim)){addLog('Come Odds at max.','info');return;}openOddsModal('come',idx,cb.flat,cb.num);}
 function removeComeOdds(idx){const cb=G.comeBets[idx];if(!cb||!cb.odds)return;const red=r2(Math.min(G.chip,cb.odds));cb.odds=r2(cb.odds-red);G.bankroll=r2(G.bankroll+red);updateUI();}
 function removeComeFlat(idx){const cb=G.comeBets[idx];if(!cb)return;const red=r2(Math.min(G.chip,cb.flat));cb.flat=r2(cb.flat-red);G.bankroll=r2(G.bankroll+red);if(cb.flat<=0){G.bankroll=r2(G.bankroll+(cb.odds||0));G.comeBets.splice(idx,1);}updateUI();}
-
-// ── MOVE MODAL ────────────────────────────────────────────────────────────────
 function openMoveModal(fromNum,placeAmt,buyAmt){
   moveCtx={fromNum,placeAmt,buyAmt};
   const parts=[];if(placeAmt>0)parts.push('Place '+fmt(placeAmt));if(buyAmt>0)parts.push('Buy '+fmt(buyAmt));
@@ -692,8 +749,7 @@ function openMoveModal(fromNum,placeAmt,buyAmt){
   document.getElementById('modal-move').classList.remove('hidden');
 }
 function moveBetTo(toNum){
-  document.getElementById('modal-move').classList.add('hidden');
-  if(!moveCtx)return;
+  document.getElementById('modal-move').classList.add('hidden');if(!moveCtx)return;
   const{fromNum,placeAmt,buyAmt}=moveCtx;
   if(placeAmt>0){delete G.bets['place'+fromNum];G.bets['place'+toNum]=r2((G.bets['place'+toNum]||0)+placeAmt);addLog('Place '+fromNum+' → '+toNum,'info');}
   if(buyAmt>0){delete G.bets['buy'+fromNum];G.bets['buy'+toNum]=r2((G.bets['buy'+toNum]||0)+buyAmt);addLog('Buy '+fromNum+' → '+toNum,'info');}
@@ -709,7 +765,8 @@ function bonusRemove(t){const c=G.bonus[t];if(!c)return;const rv=r2(Math.min(G.c
 function placeBet(key){if(!G.bankroll){addLog('No bankroll. Redeem a code to continue.','info');checkBroke();return;}if(key==='pass'){if(G.passLocked){addLog('Pass Line locked.','info');return;}if(G.phase==='point'){addLog('Pass Line: come-out only.','info');return;}}if(key==='come'){if(G.phase==='comeout'){addLog('Come: after point only.','info');return;}if(G.bets['come']){addLog('Come waiting.','info');return;}}const a=r2(Math.min(G.chip,G.bankroll));G.bets[key]=r2((G.bets[key]||0)+a);G.bankroll=r2(G.bankroll-a);updateUI();}
 function removeBet(key){if(key==='pass'&&G.passLocked){addLog('Pass Line locked.','info');return;}const c=G.bets[key]||0;if(!c)return;const rv=r2(Math.min(G.chip,c));G.bets[key]=r2(c-rv);G.bankroll=r2(G.bankroll+rv);if(G.bets[key]<=0)delete G.bets[key];updateUI();}
 function pressAll(){ALL_NUMS.forEach(n=>{['place','buy'].forEach(t=>{const k=t+n,c=G.bets[k]||0;if(!c||c>G.bankroll)return;G.bets[k]=r2(c*2);G.bankroll=r2(G.bankroll-c);});});updateUI();}
-function acrossAll(){INNER_NUMS.filter(n=>n!==G.point).forEach(n=>{const k='place'+n;if(!G.bets[k]&&G.bankroll>0){const a=r2(Math.min(G.chip,G.bankroll));G.bets[k]=a;G.bankroll=r2(G.bankroll-a);}});updateUI();}
+// Across: place all box numbers except point
+function acrossAll(){ALL_BOX_NUMS.filter(n=>n!==G.point).forEach(n=>{const k='place'+n;if(!G.bets[k]&&G.bankroll>0){const a=r2(Math.min(G.chip,G.bankroll));G.bets[k]=a;G.bankroll=r2(G.bankroll-a);}});updateUI();}
 function doubleBet(){const c=dblCost();if(!c||c>G.bankroll){addLog(c?'Not enough.':'No place/buy bets.','info');return;}for(const k in G.bets)if(!CONTRACT.has(k)&&(k.startsWith('place')||k.startsWith('buy')))G.bets[k]=r2(G.bets[k]*2);G.bankroll=r2(G.bankroll-c);addLog('Doubled.','info');updateUI();}
 function repeatLastBet(){if(!G.snapshot||!G.canRepeat)return;let cost=0;const tr={};for(const k in G.snapshot.bets){const h=G.bets[k]||0,nv=G.snapshot.bets[k]||0;if(nv>h){tr[k]=r2(nv-h);cost=r2(cost+tr[k]);}}const cr=[];for(const s of G.snapshot.comeBets){if(!G.comeBets.find(c=>c.num===s.num&&Math.abs(c.flat-s.flat)<.01)){cr.push(s);cost=r2(cost+s.flat+(s.odds||0));}}if(cost>G.bankroll){addLog('Not enough (need '+fmt(cost)+').','info');return;}for(const k in tr){G.bets[k]=r2((G.bets[k]||0)+tr[k]);G.bankroll=r2(G.bankroll-tr[k]);}for(const s of cr){G.comeBets.push({num:s.num,flat:s.flat,odds:s.odds||0});G.bankroll=r2(G.bankroll-s.flat-(s.odds||0));}addLog('Last bet restored ('+fmt(cost)+').','info');updateUI();}
 function toggleBetsOn(){if(G.phase==='comeout'){G.betsOn=!G.betsOn;updateUI();}else{G.betsOffThisRoll=!G.betsOffThisRoll;updateUI();}}
@@ -728,30 +785,110 @@ function rollDice(){
   const v1=Math.ceil(Math.random()*6),v2=Math.ceil(Math.random()*6),sum=v1+v2,hard=v1===v2;
   startAnim(v1,v2,()=>{
     const ov=document.getElementById('dice-sum-overlay');ov.textContent=sum;ov.style.opacity='1';
-    resolve(v1,v2,sum,hard);
-    chkRepeat();
-    G.bankrollAfterLastRoll=G.bankroll;
+    const returned=resolve(v1,v2,sum,hard);
+    chkRepeat();G.bankrollAfterLastRoll=G.bankroll;
     saveToSupabase();
     document.getElementById('roll-btn').disabled=false;
     updateUI();
     checkBroke();
+    if(returned>0)showWinnerModal(returned);
   });
 }
 
-// ── RESOLVE ───────────────────────────────────────────────────────────────────
+// ── RESOLVE ── returns total chips returned to player this roll (profits + returned stakes)
 function resolve(d1,d2,sum,hard){
-  let lastWinAmt=0;const act=bActive();
+  let returned=0; // tracks chips actually coming back to player (profit + returned stakes)
+  const act=bActive();
   if(sum===7)loseBonus();
-  function pP(key,ratio,lbl){const s=G.bets[key]||0;if(!s)return;const p=r2(s*ratio),tot=r2(s+p);G.bankroll=r2(G.bankroll+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;addLog(lbl+': +'+fmt(p)+' ('+fmt(tot)+' total, stays)','win');}
-  function pR(key,ratio,lbl){const s=G.bets[key]||0;if(!s)return;const p=r2(s*ratio),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;delete G.bets[key];addLog(lbl+': +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}
+
+  function pP(key,ratio,lbl){
+    // Bet stays — only profit returned
+    const s=G.bets[key]||0;if(!s)return;
+    const p=r2(s*ratio),tot=r2(s+p);
+    G.bankroll=r2(G.bankroll+p);returned=r2(returned+p);G.wins++;
+    addLog(lbl+': +'+fmt(p)+' ('+fmt(tot)+' total, stays)','win');
+  }
+  function pR(key,ratio,lbl){
+    // Bet returned — profit + stake both come back
+    const s=G.bets[key]||0;if(!s)return;
+    const p=r2(s*ratio),tot=r2(s+p);
+    G.bankroll=r2(G.bankroll+s+p);returned=r2(returned+s+p);G.wins++;
+    delete G.bets[key];addLog(lbl+': +'+fmt(p)+' ('+fmt(tot)+' returned)','win');
+  }
   function lose(key,lbl){const s=G.bets[key]||0;if(!s)return;G.losses++;delete G.bets[key];addLog(lbl+': lost '+fmt(s),'lose');}
+
   const wc=G.bets['come']||0;
-  if(sum!==7){const rem=[];G.comeBets.forEach((cb,i)=>{if(cb.num!==sum)return;const op=r2((cb.odds||0)*(ODDS_PAY[cb.num]||0));if(wc>0&&wc===cb.flat){const pr=r2(cb.flat+op),tot=r2(cb.flat+pr);G.bankroll=r2(G.bankroll+pr);lastWinAmt=r2(lastWinAmt+pr);G.wins++;cb.odds=0;delete G.bets['come'];addLog('Come ('+cb.num+'): off+on +'+fmt(pr)+' ('+fmt(tot)+' stays)','win');}else{const pr=r2(cb.flat+op),tot=r2(cb.flat+pr);G.bankroll=r2(G.bankroll+cb.flat+pr);lastWinAmt=r2(lastWinAmt+pr);G.wins++;rem.push(i);addLog('Come ('+cb.num+'): +'+fmt(pr)+' ('+fmt(tot)+' returned)','win');}});for(let i=rem.length-1;i>=0;i--)G.comeBets.splice(rem[i],1);}
-  if(sum!==7){const def=NUM_DEFS[sum];if(def&&act){const pk='place'+sum;if(G.bets[pk]){const[w,d]=def.place,s=G.bets[pk],p=r2(s*w/d),tot=r2(s+p);G.bankroll=r2(G.bankroll+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;addLog('Place '+sum+': +'+fmt(p)+' ('+fmt(tot)+' total, stays)','win');}const bk='buy'+sum;if(G.bets[bk]){const s=G.bets[bk],gr=r2(s*def.buyRatio),net=r2(gr-r2(gr*.05)),tot=r2(s+net);G.bankroll=r2(G.bankroll+s+net);lastWinAmt=r2(lastWinAmt+net);G.wins++;delete G.bets[bk];addLog('Buy '+sum+': +'+fmt(net)+' ('+fmt(tot)+' returned)','win');}}else if(def&&!act&&(G.bets['place'+sum]||G.bets['buy'+sum]))addLog('Place/Buy '+sum+': off','info');}
+  if(sum!==7){
+    const rem=[];
+    G.comeBets.forEach((cb,i)=>{
+      if(cb.num!==sum)return;
+      const op=r2((cb.odds||0)*(ODDS_PAY[cb.num]||0));
+      if(wc>0&&wc===cb.flat){
+        // Off+on: come bet stays, odds+profit returned
+        const pr=r2(cb.flat+op),tot=r2(cb.flat+pr);
+        G.bankroll=r2(G.bankroll+pr);returned=r2(returned+pr);G.wins++;
+        cb.odds=0;delete G.bets['come'];
+        addLog('Come ('+cb.num+'): off+on +'+fmt(pr)+' ('+fmt(tot)+' stays)','win');
+      }else{
+        // Come returned: flat + profit
+        const pr=r2(cb.flat+op),tot=r2(cb.flat+pr);
+        G.bankroll=r2(G.bankroll+cb.flat+pr);returned=r2(returned+cb.flat+pr);G.wins++;
+        rem.push(i);addLog('Come ('+cb.num+'): +'+fmt(pr)+' ('+fmt(tot)+' returned)','win');
+      }
+    });
+    for(let i=rem.length-1;i>=0;i--)G.comeBets.splice(rem[i],1);
+  }
+
+  if(sum!==7){
+    const def=NUM_DEFS[sum];
+    if(def&&act){
+      const pk='place'+sum;
+      if(G.bets[pk]){const[w,d]=def.place,s=G.bets[pk],p=r2(s*w/d),tot=r2(s+p);G.bankroll=r2(G.bankroll+p);returned=r2(returned+p);G.wins++;addLog('Place '+sum+': +'+fmt(p)+' ('+fmt(tot)+' total, stays)','win');}
+      const bk='buy'+sum;
+      if(G.bets[bk]){const s=G.bets[bk],gr=r2(s*def.buyRatio),net=r2(gr-r2(gr*.05)),tot=r2(s+net);G.bankroll=r2(G.bankroll+s+net);returned=r2(returned+s+net);G.wins++;delete G.bets[bk];addLog('Buy '+sum+': +'+fmt(net)+' ('+fmt(tot)+' returned)','win');}
+    }else if(def&&!act&&(G.bets['place'+sum]||G.bets['buy'+sum]))addLog('Place/Buy '+sum+': off','info');
+  }
+
   let tag='normal';
-  if(G.phase==='comeout'){if(sum===7){tag='seven-win';pR('pass',1,'Pass Line');loseComesBetsSeven();if(G.betsOn)sweepPlace();}else{if(G.bonus.open){G.bonus.open=false;G.bonus.locked=true;}G.point=sum;G.phase='point';if(G.bets['pass'])G.passLocked=true;addLog('Point is '+sum,'info');if(G.bets['pass']&&G.bankroll>0)setTimeout(()=>openOddsModal('pass',null,G.bets['pass'],sum),50);}}
-  else{if(sum===7){tag='seven-out';lose('pass','Pass Line');if(G.bets['passodds']){G.losses++;addLog('Pass Odds: lost '+fmt(G.bets['passodds']),'lose');delete G.bets['passodds'];}sweepPlace();loseComesBetsSeven();if(G.bets['come'])lose('come','Come (pre-number)');G.passLocked=false;G.point=null;G.phase='comeout';resetOff();addLog('Seven-out.','info');}else if(sum===G.point){pR('pass',1,'Pass Line');if(G.bets['passodds']){const op=r2(G.bets['passodds']*ODDS_PAY[G.point]),tot=r2(G.bets['passodds']+op);G.bankroll=r2(G.bankroll+G.bets['passodds']+op);lastWinAmt=r2(lastWinAmt+op);G.wins++;addLog('Pass Odds: +'+fmt(op)+' ('+fmt(tot)+' returned)','win');delete G.bets['passodds'];}G.passLocked=false;G.point=null;G.phase='comeout';resetOff();addLog('Point made!','win');}}
-  if(G.bets['come']){const flat=G.bets['come'];if(sum===7){lose('come','Come');}else{delete G.bets['come'];const cbIdx=G.comeBets.length;G.comeBets.push({num:sum,flat,odds:0});addLog('Come → '+sum,'info');const pa=G.bets['place'+sum]||0,ba=G.bets['buy'+sum]||0;if(pa>0||ba>0){setTimeout(()=>openMoveModal(sum,pa,ba),60);}else if(G.bankroll>0){setTimeout(()=>openOddsModal('come',cbIdx,flat,sum),60);}}}
+  if(G.phase==='comeout'){
+    if(sum===7){
+      tag='seven-win';pR('pass',1,'Pass Line');
+      loseComesBetsSeven();
+      // FIX: bets stay OFF after come-out 7 win — do NOT sweep place/buy unless betsOn
+      if(G.betsOn)sweepPlace();
+      // betsOn stays unchanged — come-out 7 does not reset it
+    }else{
+      if(G.bonus.open){G.bonus.open=false;G.bonus.locked=true;}
+      G.point=sum;G.phase='point';if(G.bets['pass'])G.passLocked=true;
+      addLog('Point is '+sum,'info');
+      if(G.bets['pass']&&G.bankroll>0)setTimeout(()=>openOddsModal('pass',null,G.bets['pass'],sum),50);
+    }
+  }else{
+    if(sum===7){
+      tag='seven-out';lose('pass','Pass Line');
+      if(G.bets['passodds']){G.losses++;addLog('Pass Odds: lost '+fmt(G.bets['passodds']),'lose');delete G.bets['passodds'];}
+      sweepPlace();loseComesBetsSeven();
+      if(G.bets['come'])lose('come','Come (pre-number)');
+      G.passLocked=false;G.point=null;G.phase='comeout';resetOff();addLog('Seven-out.','info');
+    }else if(sum===G.point){
+      pR('pass',1,'Pass Line');
+      if(G.bets['passodds']){const op=r2(G.bets['passodds']*ODDS_PAY[G.point]),tot=r2(G.bets['passodds']+op);G.bankroll=r2(G.bankroll+G.bets['passodds']+op);returned=r2(returned+G.bets['passodds']+op);G.wins++;addLog('Pass Odds: +'+fmt(op)+' ('+fmt(tot)+' returned)','win');delete G.bets['passodds'];}
+      G.passLocked=false;G.point=null;G.phase='comeout';resetOff();addLog('Point made!','win');
+    }
+  }
+
+  if(G.bets['come']){
+    const flat=G.bets['come'];
+    if(sum===7){lose('come','Come');}
+    else{
+      delete G.bets['come'];const cbIdx=G.comeBets.length;
+      G.comeBets.push({num:sum,flat,odds:0});addLog('Come → '+sum,'info');
+      const pa=G.bets['place'+sum]||0,ba=G.bets['buy'+sum]||0;
+      if(pa>0||ba>0)setTimeout(()=>openMoveModal(sum,pa,ba),60);
+      else if(G.bankroll>0)setTimeout(()=>openOddsModal('come',cbIdx,flat,sum),60);
+    }
+  }
+
   if(G.bets['field']){if([2,3,4,9,10,11,12].includes(sum)){let rx=1;if(sum===2)rx=2;if(sum===12)rx=3;pP('field',rx,'Field'+(sum===12?' (3x)':sum===2?' (2x)':''));}else lose('field','Field');}
   if(G.bets['lowfield']){[2,3,4].includes(sum)?pP('lowfield',1,'Low Field'):lose('lowfield','Low Field');}
   if(G.bets['highfield']){[10,11,12].includes(sum)?pP('highfield',1,'High Field'):lose('highfield','High Field');}
@@ -761,16 +898,34 @@ function resolve(d1,d2,sum,hard){
   if(G.bets['ace2'])sum===3?pP('ace2',15,'Ace-Deuce'):lose('ace2','Ace-Deuce');
   if(G.bets['yo'])sum===11?pP('yo',15,'Yo'):lose('yo','Yo');
   if(G.bets['anyCraps'])[2,3,12].includes(sum)?pP('anyCraps',7,'Any Craps'):lose('anyCraps','Any Craps');
-  if(G.bets['horn']){const s=G.bets['horn'],u=r2(s/4);let pr=0;if(sum===2||sum===12)pr=r2(r2(u*30)-r2(u*3));else if(sum===3||sum===11)pr=r2(r2(u*15)-r2(u*3));if([2,3,11,12].includes(sum)){const tot=r2(s+pr);G.bankroll=r2(G.bankroll+s+pr);lastWinAmt=r2(lastWinAmt+pr);G.wins++;delete G.bets['horn'];addLog('Horn: +'+fmt(pr)+' ('+fmt(tot)+' returned)','win');}else lose('horn','Horn');}
-  if(G.bets['cande']){const s=G.bets['cande'],h=r2(s/2);if([2,3,12].includes(sum)){const p=r2(h*7),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;delete G.bets['cande'];addLog('C&E (craps): +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}else if(sum===11){const p=r2(h*15),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;delete G.bets['cande'];addLog('C&E (eleven): +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}else lose('cande','C&E');}
+  if(G.bets['horn']){
+    const s=G.bets['horn'],u=r2(s/4);let pr=0;
+    if(sum===2||sum===12)pr=r2(r2(u*30)-r2(u*3));
+    else if(sum===3||sum===11)pr=r2(r2(u*15)-r2(u*3));
+    if([2,3,11,12].includes(sum)){const tot=r2(s+pr);G.bankroll=r2(G.bankroll+s+pr);returned=r2(returned+s+pr);G.wins++;delete G.bets['horn'];addLog('Horn: +'+fmt(pr)+' ('+fmt(tot)+' returned)','win');}
+    else lose('horn','Horn');
+  }
+  if(G.bets['cande']){
+    const s=G.bets['cande'],h=r2(s/2);
+    if([2,3,12].includes(sum)){const p=r2(h*7),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);returned=r2(returned+s+p);G.wins++;delete G.bets['cande'];addLog('C&E (craps): +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}
+    else if(sum===11){const p=r2(h*15),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);returned=r2(returned+s+p);G.wins++;delete G.bets['cande'];addLog('C&E (eleven): +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}
+    else lose('cande','C&E');
+  }
   if(G.bets['eleven'])sum===11?pP('eleven',15,'Eleven'):lose('eleven','Eleven');
   const hT={hard4:4,hard6:6,hard8:8,hard10:10},hM={hard4:7,hard6:9,hard8:9,hard10:7};
   for(const k in hT){if(!G.bets[k])continue;const t=hT[k];if(sum===t&&hard)pP(k,hM[k],k.replace('hard','Hard '));else if(sum===7||(sum===t&&!hard))lose(k,k.replace('hard','Hard '));}
   for(const key in HOP_MAP){if(!G.bets[key])continue;const[a,b]=HOP_MAP[key],iH=a===b,m=(d1===a&&d2===b)||(d1===b&&d2===a);if(m)pP(key,iH?30:15,'Hop '+a+'-'+b);else lose(key,'Hop '+a+'-'+b);}
-  if(sum!==7){if(LOW_NUMS.includes(sum))G.bonus.lowHit.add(sum);if(HIGH_NUMS.includes(sum))G.bonus.highHit.add(sum);if(G.bonus.low>0&&LOW_NUMS.every(n=>G.bonus.lowHit.has(n))){const s=G.bonus.low,p=r2(s*30),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;G.bonus.low=0;G.bonus.lowMax=0;G.bonus.lowHit=new Set();addLog('Low Rolls WON! +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}if(G.bonus.high>0&&HIGH_NUMS.every(n=>G.bonus.highHit.has(n))){const s=G.bonus.high,p=r2(s*30),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;G.bonus.high=0;G.bonus.highMax=0;G.bonus.highHit=new Set();addLog('High Rolls WON! +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}if(G.bonus.all>0&&ALL_BONUS.every(n=>G.bonus.lowHit.has(n)||G.bonus.highHit.has(n))){const s=G.bonus.all,p=r2(s*155),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);lastWinAmt=r2(lastWinAmt+p);G.wins++;G.bonus.all=0;G.bonus.allMax=0;addLog("Roll'em All WON! +"+fmt(p)+' ('+fmt(tot)+' returned)','win');}}
+  if(sum!==7){
+    if(LOW_NUMS.includes(sum))G.bonus.lowHit.add(sum);
+    if(HIGH_NUMS.includes(sum))G.bonus.highHit.add(sum);
+    if(G.bonus.low>0&&LOW_NUMS.every(n=>G.bonus.lowHit.has(n))){const s=G.bonus.low,p=r2(s*30),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);returned=r2(returned+s+p);G.wins++;G.bonus.low=0;G.bonus.lowMax=0;G.bonus.lowHit=new Set();addLog('Low Rolls WON! +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}
+    if(G.bonus.high>0&&HIGH_NUMS.every(n=>G.bonus.highHit.has(n))){const s=G.bonus.high,p=r2(s*30),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);returned=r2(returned+s+p);G.wins++;G.bonus.high=0;G.bonus.highMax=0;G.bonus.highHit=new Set();addLog('High Rolls WON! +'+fmt(p)+' ('+fmt(tot)+' returned)','win');}
+    if(G.bonus.all>0&&ALL_BONUS.every(n=>G.bonus.lowHit.has(n)||G.bonus.highHit.has(n))){const s=G.bonus.all,p=r2(s*155),tot=r2(s+p);G.bankroll=r2(G.bankroll+s+p);returned=r2(returned+s+p);G.wins++;G.bonus.all=0;G.bonus.allMax=0;addLog("Roll'em All WON! +"+fmt(p)+' ('+fmt(tot)+' returned)','win');}
+  }
   if(G.betsOffThisRoll&&G.phase==='point')G.betsOffThisRoll=false;
-  if(lastWinAmt>0)G.lastWin=lastWinAmt;
+  if(returned>0)G.lastWin=returned;
   G.rollHistory.unshift({sum,isHard:hard&&HARD_NUMS.has(sum),tag});
+  return returned;
 }
 
 function addLog(t,c){const el=document.getElementById('log');const p=document.createElement('p');p.className=c||'';p.textContent=t;el.prepend(p);while(el.children.length>30)el.removeChild(el.lastChild);}
@@ -791,6 +946,7 @@ function updateUI(){
   const act=bActive();
   document.getElementById('bets-status').textContent=act?'ON':'OFF on come-out';
   document.getElementById('bets-status').style.color=act?'rgba(100,255,150,.8)':'rgba(255,200,0,.7)';
+
   ALL_NUMS.forEach(n=>{
     const be=document.getElementById('nb-buy-'+n),pe=document.getElementById('nb-place-'+n);if(!be)return;
     const ba=G.bets['buy'+n]||0,pa=G.bets['place'+n]||0;
@@ -804,29 +960,61 @@ function updateUI(){
     if(box)box.classList.toggle('is-point',ip);const pk=document.getElementById('puck-'+n);if(pk)pk.style.display=ip?'flex':'none';
     const slot=document.getElementById('come-slot-'+n);if(!slot)return;
     const cbIdx=G.comeBets.findIndex(c=>c.num===n);
-    if(cbIdx>=0){const cb=G.comeBets[cbIdx],cur=cb.odds||0,lim=oddsLim(cb.flat,n),atMax=r2(cur)>=r2(lim),canOdds=!atMax&&G.bankroll>0;let html='<div class="come-on-box"><span class="come-flat-amt">'+fmt(cb.flat)+'</span>';if(canOdds)html+='<button class="come-odds-btn" onclick="openComeOddsModal('+cbIdx+')">+O</button>';if(cur>0)html+='<span class="come-odds-amt">'+fmt(cur)+'</span><button class="come-odds-rm" onclick="event.stopPropagation();removeComeOdds('+cbIdx+')">−</button>';html+='<button class="come-rm" onclick="event.stopPropagation();removeComeFlat('+cbIdx+')">−</button></div>';slot.innerHTML=html;}
-    else slot.innerHTML='';
+    if(cbIdx>=0){
+      const cb=G.comeBets[cbIdx],cur=cb.odds||0,lim=oddsLim(cb.flat,n),atMax=r2(cur)>=r2(lim),canOdds=!atMax&&G.bankroll>0;
+      let html='<div class="come-on-box"><span class="come-flat-amt">'+fmt(cb.flat)+'</span>';
+      if(canOdds)html+='<button class="come-odds-btn" onclick="openComeOddsModal('+cbIdx+')">+O</button>';
+      if(cur>0)html+='<span class="come-odds-amt">'+fmt(cur)+'</span><button class="come-odds-rm" onclick="event.stopPropagation();removeComeOdds('+cbIdx+')">−</button>';
+      html+='<button class="come-rm" onclick="event.stopPropagation();removeComeFlat('+cbIdx+')">−</button></div>';
+      slot.innerHTML=html;
+    }else slot.innerHTML='';
   });
-  ['come','field','lowfield','highfield','hard4','hard6','hard8','hard10','any7','midnight','aces','ace2','yo','anyCraps','horn','cande','eleven',...Object.keys(HOP_MAP)].forEach(k=>{const el=document.getElementById('bet-'+k),st=document.getElementById('stk-'+k),mb=document.getElementById('m-'+k);if(!el||!st)return;const a=G.bets[k]||0;st.textContent=a?fmt(a):'';el.classList.toggle('active',a>0);if(mb)mb.classList.toggle('vis',a>0);});
+
+  // Simple bets
+  ['field','lowfield','highfield','hard4','hard6','hard8','hard10','any7','midnight','aces','ace2','yo','anyCraps','horn','cande','eleven',...Object.keys(HOP_MAP)].forEach(k=>{
+    const el=document.getElementById('bet-'+k),st=document.getElementById('stk-'+k),mb=document.getElementById('m-'+k);
+    if(!el||!st)return;const a=G.bets[k]||0;st.textContent=a?fmt(a):'';el.classList.toggle('active',a>0);if(mb)mb.classList.toggle('vis',a>0);
+  });
+  // Circles (C, C&E, E)
+  ['anyCraps','cande','eleven'].forEach(k=>{
+    const el=document.getElementById('bet-'+k),st=document.getElementById('stk-'+k),mb=document.getElementById('m-'+k);
+    if(!el)return;const a=G.bets[k]||0;
+    if(st)st.textContent=a?fmt(a):'';
+    el.classList.toggle('active',a>0);
+    if(mb)mb.classList.toggle('vis',a>0);
+  });
+
   const ca=G.bets['come']||0;document.getElementById('stk-come').textContent=ca?fmt(ca):'';document.getElementById('come-main-zone').classList.toggle('active-bar',!!ca);
   document.getElementById('stk-pass').textContent=(G.bets['pass']||0)?fmt(G.bets['pass']):'';document.getElementById('lk-pass').textContent=G.passLocked?'locked':'';document.getElementById('pass-main-zone').classList.toggle('active-bar',!!(G.bets['pass']));
   const poc=G.bets['passodds']||0;document.getElementById('stk-passodds').textContent=poc?fmt(poc):'';
   const polim=document.getElementById('po-limit');
   if(G.point&&G.bets['pass']){const m=ODDS_MULT[G.point]||1,lim=oddsLim(G.bets['pass'],G.point);polim.textContent=m+'x · '+ODDS_LABEL[G.point];document.getElementById('pass-odds-cell').classList.toggle('active',poc>0);}
   else{polim.textContent='—';document.getElementById('pass-odds-cell').classList.remove('active');}
+
   const bO=G.bonus.open,bL=G.bonus.locked;
   document.getElementById('bonus-status').textContent=bO?'Open — click to bet!':bL?'Locked — reduce only':'Open after a 7';
   document.getElementById('bonus-status').style.color=bO?'rgba(100,255,150,.8)':bL?'rgba(255,150,0,.8)':'rgba(255,200,0,.7)';
-  [{type:'low',nums:LOW_NUMS,hit:G.bonus.lowHit},{type:'high',nums:HIGH_NUMS,hit:G.bonus.highHit}].forEach(({type,nums,hit})=>{const a=G.bonus[type];document.getElementById('bstk-'+type).textContent=a>0?fmt(a):'';const numsEl=document.getElementById('bnums-'+type);numsEl.innerHTML='';nums.forEach(n=>{const d=document.createElement('div');d.className='bnum'+(hit.has(n)?' hit':'');d.textContent=n;numsEl.appendChild(d);});document.getElementById('bnote-'+type).textContent=bL?(a>0?'Reduce only':'Cleared'):(!bO?'Bet after a 7':'Click · '+fmt(Math.min(G.chip,G.bankroll)));const bx=document.getElementById('bbonus-'+type);bx.classList.toggle('has-bet',a>0);bx.classList.toggle('locked-bet',bL&&a>0);bx.classList.toggle('closed',!bO&&!bL&&!a);const mb=document.getElementById('mb-bonus-'+type);if(mb)mb.classList.toggle('vis',a>0);});
-  {const a=G.bonus.all;document.getElementById('bstk-all').textContent=a>0?fmt(a):'';document.getElementById('bnote-all').textContent=bL?(a>0?'Reduce only':'Cleared'):(!bO?'Bet after a 7':'Click · '+fmt(Math.min(G.chip,G.bankroll)));const bx=document.getElementById('bbonus-all');bx.classList.toggle('has-bet',a>0);bx.classList.toggle('locked-bet',bL&&a>0);bx.classList.toggle('closed',!bO&&!bL&&!a);const mb=document.getElementById('mb-bonus-all');if(mb)mb.classList.toggle('vis',a>0);}
-  const hist=document.getElementById('roll-history');hist.innerHTML='';G.rollHistory.forEach(r=>{const pip=document.createElement('div');pip.className='roll-pip '+(r.tag==='seven-out'?'seven-out':r.tag==='seven-win'?'seven-win':r.isHard?'hard':'normal');pip.textContent=r.sum;hist.appendChild(pip);});hist.scrollLeft=0;
+  [{type:'low',nums:LOW_NUMS,hit:G.bonus.lowHit},{type:'high',nums:HIGH_NUMS,hit:G.bonus.highHit}].forEach(({type,nums,hit})=>{
+    const a=G.bonus[type];document.getElementById('bstk-'+type).textContent=a>0?fmt(a):'';
+    const numsEl=document.getElementById('bnums-'+type);numsEl.innerHTML='';
+    nums.forEach(n=>{const d=document.createElement('div');d.className='bnum'+(hit.has(n)?' hit':'');d.textContent=n;numsEl.appendChild(d);});
+    document.getElementById('bnote-'+type).textContent=bL?(a>0?'Reduce only':'Cleared'):(!bO?'Bet after a 7':'Click · '+fmt(Math.min(G.chip,G.bankroll)));
+    const bx=document.getElementById('bbonus-'+type);bx.classList.toggle('has-bet',a>0);bx.classList.toggle('locked-bet',bL&&a>0);bx.classList.toggle('closed',!bO&&!bL&&!a);
+    const mb=document.getElementById('mb-bonus-'+type);if(mb)mb.classList.toggle('vis',a>0);
+  });
+  {const a=G.bonus.all;document.getElementById('bstk-all').textContent=a>0?fmt(a):'';
+    document.getElementById('bnote-all').textContent=bL?(a>0?'Reduce only':'Cleared'):(!bO?'Bet after a 7':'Click · '+fmt(Math.min(G.chip,G.bankroll)));
+    const bx=document.getElementById('bbonus-all');bx.classList.toggle('has-bet',a>0);bx.classList.toggle('locked-bet',bL&&a>0);bx.classList.toggle('closed',!bO&&!bL&&!a);
+    const mb=document.getElementById('mb-bonus-all');if(mb)mb.classList.toggle('vis',a>0);}
+
+  const hist=document.getElementById('roll-history');hist.innerHTML='';
+  G.rollHistory.forEach(r=>{const pip=document.createElement('div');pip.className='roll-pip '+(r.tag==='seven-out'?'seven-out':r.tag==='seven-win'?'seven-win':r.isHard?'hard':'normal');pip.textContent=r.sum;hist.appendChild(pip);});
+  hist.scrollLeft=0;
 }
 
-// ── BOOT ──────────────────────────────────────────────────────────────────────
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('auth-screen').style.display!=='none')handleAuth();});
 tryRestoreSession();
 </script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
 </html>
