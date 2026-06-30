@@ -29,10 +29,10 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 #game-screen{display:none;height:100vh;max-height:100vh;flex-direction:column;overflow:hidden;background:#0a2a14}
 
 /* ── TOP ROW: left col label area + lucky roller + info panel ── */
-#top-row{display:flex;flex-direction:row;flex-shrink:0;height:70px;border-bottom:1px solid rgba(255,255,255,.12)}
+#top-row{display:flex;flex-direction:row;flex-shrink:0;height:calc(100vh * 2 / 16);border-bottom:1px solid rgba(255,255,255,.12);min-height:44px;max-height:80px}
 
 /* Left col header (matches left col width) */
-#left-col-header{width:195px;flex-shrink:0;background:rgba(0,0,0,.35);border-right:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;padding:4px}
+#left-col-header{width:195px;flex-shrink:0;background:rgba(0,0,0,.35);border-right:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;padding:3px}
 .mode-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 6px;border-radius:5px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);cursor:pointer;font-size:10px;font-weight:700;color:rgba(255,255,255,.6)}
 .mode-btn.active{background:rgba(255,215,0,.18);border-color:#ffd700;color:#fff}
 .mode-btn-amt{font-size:9px;color:#ffd700;font-weight:600}
@@ -57,7 +57,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 .mbtn-bonus:hover{background:rgba(180,0,0,.7)}
 .lr-bonus-wrap:hover .mbtn-bonus.vis{display:block}
 /* Dice zone inside lucky roller */
-#dice-zone{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+#dice-zone{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
 #dice-canvas-wrap{position:relative;flex-shrink:0}
 #dice-sum-overlay{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:14px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9);pointer-events:none;opacity:0;transition:opacity .2s}
 .rollem-all-bar{border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.2);cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:2px 6px;transition:background .12s;position:relative}
@@ -199,8 +199,10 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 #pass-main:hover{background:rgba(0,80,180,.35)}
 #pass-main.active-bar{background:rgba(255,215,0,.15)}
 
-/* ── HISTORY STRIP ── */
-#history-strip{display:flex;align-items:center;padding:2px 4px;gap:4px;background:rgba(0,0,0,.4);border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;height:44px}
+/* ── BOTTOM SECTION ── */
+#bottom-section{display:flex;flex-direction:row;flex-shrink:0;height:calc(100vh * 2 / 16);min-height:44px;max-height:80px;background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.1)}
+#bottom-left{flex:1;display:flex;flex-direction:column;min-width:0}
+#history-strip{display:flex;align-items:center;padding:2px 4px;gap:4px;background:rgba(0,0,0,.35);border-bottom:0.5px solid rgba(255,255,255,.1);flex:1;min-height:0}
 #roll-history{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none;align-items:center}
 #roll-history::-webkit-scrollbar{display:none}
 .roll-pip{min-width:32px;border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;padding:2px 3px;background:rgba(255,255,255,.1)}
@@ -218,7 +220,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 #log-btn{width:28px;height:28px;border-radius:50%;background:rgba(255,215,0,.2);border:1px solid rgba(255,215,0,.4);color:#ffd700;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
 /* ── BOTTOM BAR ── */
-#bottom-bar{display:flex;align-items:center;gap:3px;padding:3px 5px;background:rgba(0,0,0,.55);border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;height:40px}
+#bottom-bar{display:flex;align-items:center;gap:3px;padding:2px 4px;background:rgba(0,0,0,.45);flex:1;min-height:0}
 .chip{width:30px;height:30px;border-radius:50%;font-size:9px;font-weight:700;cursor:pointer;border:2px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;transition:transform .1s;flex-shrink:0;color:#fff}
 .chip:hover{transform:scale(1.1)}
 .chip.sel{transform:scale(1.15);box-shadow:0 0 0 2px #ffd700}
@@ -226,10 +228,10 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 .bar-btn:hover{background:rgba(255,255,255,.2)}
 .bar-btn:disabled{opacity:.35;cursor:not-allowed}
 .bar-btn.danger{border-color:rgba(255,100,100,.4)}
-#roll-btn{background:linear-gradient(180deg,#ffe066 0%,#c8a200 100%);border:none;border-radius:8px;color:#111;font-size:15px;font-weight:900;padding:6px 16px;cursor:pointer;flex-shrink:0;letter-spacing:.06em;box-shadow:0 2px 0 #7a5c00,0 0 16px rgba(255,215,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.3);transition:all .1s;height:30px}
-#roll-btn:hover{background:linear-gradient(180deg,#fff0a0 0%,#e6bb00 100%);box-shadow:0 2px 0 #7a5c00,0 0 24px rgba(255,215,0,.5)}
-#roll-btn:active{transform:translateY(1px);box-shadow:0 1px 0 #7a5c00}
-#roll-btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+#roll-btn{background:linear-gradient(180deg,#ffe066 0%,#c8a200 100%);border:none;border-radius:0;color:#111;font-size:18px;font-weight:900;padding:6px 20px;cursor:pointer;flex-shrink:0;letter-spacing:.06em;box-shadow:inset -2px 0 0 #7a5c00,0 0 20px rgba(255,215,0,.3);text-shadow:0 1px 0 rgba(255,255,255,.3);transition:all .1s;align-self:stretch;border-left:2px solid #7a5c00}
+#roll-btn:hover{background:linear-gradient(180deg,#fff0a0 0%,#e6bb00 100%);box-shadow:inset -2px 0 0 #7a5c00,0 0 30px rgba(255,215,0,.5)}
+#roll-btn:active{filter:brightness(.9)}
+#roll-btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
 
 /* ── MODALS ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;padding:12px}
@@ -559,27 +561,32 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
     </div>
   </div><!-- end play-area -->
 
-  <!-- HISTORY STRIP -->
-  <div id="history-strip">
-    <div id="bets-status-bar">OFF</div>
-    <div id="roll-history"></div>
-    <button id="log-btn" onclick="openLogModal()">?</button>
-  </div>
-
-  <!-- BOTTOM BAR -->
-  <div id="bottom-bar">
-    <div class="chip" style="background:#b0b0b0;color:#222;border-color:#888" data-val="1" onclick="selectChip(1)">$1</div>
-    <div class="chip" style="background:#2471a3;border-color:#1a5276" data-val="2" onclick="selectChip(2)">$2</div>
-    <div class="chip" style="background:#d4ac0d;border-color:#b7950b;color:#111" data-val="3" onclick="selectChip(3)">$3</div>
-    <div class="chip" style="background:#c0392b;border-color:#922b21" data-val="5" onclick="selectChip(5)">$5</div>
-    <div class="chip" style="background:#f39c12;border-color:#d68910;color:#111" data-val="10" onclick="selectChip(10)">$10</div>
-    <div class="chip" style="background:#27ae60;border-color:#1e8449" data-val="25" onclick="selectChip(25)">$25</div>
-    <div class="chip" style="background:#7d4f30;border-color:#5d3a22" data-val="50" onclick="selectChip(50)">$50</div>
-    <div class="chip" style="background:#2c2c2c;border-color:#111" data-val="100" onclick="selectChip(100)">$100</div>
-    <div style="flex:1"></div>
-    <button class="bar-btn danger" onclick="clearRemovable()">Clear</button>
-    <button class="bar-btn" id="double-btn" onclick="doubleBet()">Double</button>
-    <button class="bar-btn" id="repeat-btn" onclick="repeatLastBet()" disabled>Repeat</button>
+  <!-- BOTTOM SECTION: history + chips on left, ROLL spanning both on right -->
+  <div id="bottom-section">
+    <div id="bottom-left">
+      <!-- History row (1 unit) -->
+      <div id="history-strip">
+        <div id="bets-status-bar">OFF</div>
+        <div id="roll-history"></div>
+        <button id="log-btn" onclick="openLogModal()">?</button>
+      </div>
+      <!-- Chips row (1 unit) -->
+      <div id="bottom-bar">
+        <div class="chip" style="background:#b0b0b0;color:#222;border-color:#888" data-val="1" onclick="selectChip(1)">$1</div>
+        <div class="chip" style="background:#2471a3;border-color:#1a5276" data-val="2" onclick="selectChip(2)">$2</div>
+        <div class="chip" style="background:#d4ac0d;border-color:#b7950b;color:#111" data-val="3" onclick="selectChip(3)">$3</div>
+        <div class="chip" style="background:#c0392b;border-color:#922b21" data-val="5" onclick="selectChip(5)">$5</div>
+        <div class="chip" style="background:#f39c12;border-color:#d68910;color:#111" data-val="10" onclick="selectChip(10)">$10</div>
+        <div class="chip" style="background:#27ae60;border-color:#1e8449" data-val="25" onclick="selectChip(25)">$25</div>
+        <div class="chip" style="background:#7d4f30;border-color:#5d3a22" data-val="50" onclick="selectChip(50)">$50</div>
+        <div class="chip" style="background:#2c2c2c;border-color:#111" data-val="100" onclick="selectChip(100)">$100</div>
+        <div style="flex:1"></div>
+        <button class="bar-btn danger" onclick="clearRemovable()">Clear</button>
+        <button class="bar-btn" id="double-btn" onclick="doubleBet()">Double</button>
+        <button class="bar-btn" id="repeat-btn" onclick="repeatLastBet()" disabled>Repeat</button>
+      </div>
+    </div>
+    <!-- ROLL spans both rows -->
     <button id="roll-btn" onclick="rollDice()">ROLL</button>
   </div>
 
