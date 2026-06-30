@@ -552,10 +552,11 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
               <span class="odds-stk" id="stk-passodds"></span>
               <span class="odds-pay" id="po-limit">—</span>
             </div>
-            <div id="pass-main" onclick="placeBet('pass')">
+            <div id="pass-main" onclick="placeBet('pass')" style="position:relative">
               <div class="zone-name" style="font-size:12px">PASS LINE</div>
               <div class="zone-stk" id="stk-pass"></div>
               <div class="zone-note" id="lk-pass"></div>
+              <button class="mbtn" id="m-pass" onclick="event.stopPropagation();removeBet('pass')" style="display:none;bottom:3px;right:3px">−</button>
             </div>
           </div>
         </div>
@@ -706,7 +707,7 @@ async function registerPlayer(username,password){
   if(ex)throw new Error('That username is already taken.');
   const hash=await hashPassword(password);const token=generateToken();
   const expires=new Date(Date.now()+30*24*60*60*1000).toISOString();
-  const{data,error}=await sb.from('players').insert({username,password_hash:hash,bankroll:0,net_pnl:0,total_redeemed:0,session_token:token,session_expires:expires}).select().single();
+  const{data,error}=await sb.from('players').insert({username,password_hash:hash,bankroll:20,net_pnl:0,total_redeemed:0,session_token:token,session_expires:expires}).select().single();
   if(error)throw new Error('Could not create account: '+error.message);
   localStorage.setItem('craps_session',token);startSession(data);
 }
@@ -1120,7 +1121,7 @@ function updateUI(){
   // Come
   {const ca=G.bets['come']||0;const st=document.getElementById('stk-come');if(st)st.textContent=ca?fmt(ca):'';const cb=document.getElementById('come-bar');if(cb)cb.classList.toggle('active-bar',!!ca);}
   // Pass
-  {const ps=document.getElementById('stk-pass');if(ps)ps.textContent=(G.bets['pass']||0)?fmt(G.bets['pass']):'';const lk=document.getElementById('lk-pass');if(lk)lk.textContent=G.passLocked?'locked':'';const pm=document.getElementById('pass-main');if(pm)pm.classList.toggle('active-bar',!!(G.bets['pass']));const poc=G.bets['passodds']||0;const postk=document.getElementById('stk-passodds');if(postk)postk.textContent=poc?fmt(poc):'';const polim=document.getElementById('po-limit');const poc2=document.getElementById('pass-odds-cell');if(G.point&&G.bets['pass']){const m=ODDS_MULT[G.point]||1;if(polim)polim.textContent=m+'x·'+ODDS_LABEL[G.point];if(poc2)poc2.classList.toggle('active',poc>0);}else{if(polim)polim.textContent='—';if(poc2)poc2.classList.remove('active');}}
+  {const ps=document.getElementById('stk-pass');if(ps)ps.textContent=(G.bets['pass']||0)?fmt(G.bets['pass']):'';const lk=document.getElementById('lk-pass');if(lk)lk.textContent=G.passLocked?'locked':'';const pm=document.getElementById('pass-main');if(pm)pm.classList.toggle('active-bar',!!(G.bets['pass']));const mb=document.getElementById('m-pass');if(mb)mb.style.display=(G.bets['pass']&&!G.passLocked)?'block':'none';const poc=G.bets['passodds']||0;const postk=document.getElementById('stk-passodds');if(postk)postk.textContent=poc?fmt(poc):'';const polim=document.getElementById('po-limit');const poc2=document.getElementById('pass-odds-cell');if(G.point&&G.bets['pass']){const m=ODDS_MULT[G.point]||1;if(polim)polim.textContent=m+'x·'+ODDS_LABEL[G.point];if(poc2)poc2.classList.toggle('active',poc>0);}else{if(polim)polim.textContent='—';if(poc2)poc2.classList.remove('active');}}
   // Bonus bets
   const bO=G.bonus.open,bL=G.bonus.locked,bG=G.bonus.gracePeriod;
   [{type:'low',nums:LOW_NUMS,hit:G.bonus.lowHit},{type:'high',nums:HIGH_NUMS,hit:G.bonus.highHit}].forEach(({type,nums,hit})=>{
