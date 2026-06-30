@@ -26,13 +26,13 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 .auth-error{background:rgba(180,0,0,.25);border:1px solid rgba(255,80,80,.3);border-radius:6px;padding:8px 10px;font-size:11px;color:#ff9a9a;margin-bottom:12px;display:none}
 
 /* ── GAME: full viewport, no scroll ── */
-#game-screen{display:none;height:66.667vh;max-height:66.667vh;flex-direction:column;overflow:hidden;background:#0a2a14;zoom:1.5}
+#game-screen{display:none;height:100vh;max-height:100vh;width:100vw;flex-direction:column;overflow:hidden;background:#0a2a14}
 
 /* ── TOP ROW: left col label area + lucky roller + info panel ── */
-#top-row{display:flex;flex-direction:row;flex-shrink:0;height:calc(66.667vh * 3 / 16);border-bottom:1px solid rgba(255,255,255,.12);min-height:36px;max-height:67px}
+#top-row{display:flex;flex-direction:row;flex-shrink:0;height:calc(100vh * 3 / 16);border-bottom:1px solid rgba(255,255,255,.12)}
 
 /* Left col header (matches left col width) */
-#left-col-header{width:240px;flex-shrink:0;background:rgba(0,0,0,.35);border-right:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;padding:3px}
+#left-col-header{width:24vw;min-width:160px;max-width:260px;flex-shrink:0;background:rgba(0,0,0,.35);border-right:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;padding:3px}
 .mode-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 6px;border-radius:5px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);cursor:pointer;font-size:10px;font-weight:700;color:rgba(255,255,255,.6)}
 .mode-btn.active{background:rgba(255,215,0,.18);border-color:#ffd700;color:#fff}
 .mode-btn-amt{font-size:9px;color:#ffd700;font-weight:600}
@@ -65,7 +65,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 .rollem-all-bar.has-bet{border-color:#ffd700}
 
 /* Info panel (upper right) */
-#info-panel{width:160px;flex-shrink:0;background:rgba(0,0,0,.35);padding:4px 6px;display:flex;flex-direction:column;gap:2px;justify-content:space-between}
+#info-panel{width:16vw;min-width:110px;max-width:175px;flex-shrink:0;background:rgba(0,0,0,.35);padding:4px 6px;display:flex;flex-direction:column;gap:2px;justify-content:space-between}
 .info-row{display:flex;gap:6px;align-items:center}
 .info-btn{background:rgba(255,255,255,.1);border:0.5px solid rgba(255,255,255,.2);border-radius:4px;color:#fff;font-size:9px;padding:3px 5px;cursor:pointer;white-space:nowrap}
 .info-btn:hover{background:rgba(255,255,255,.2)}
@@ -80,7 +80,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 #play-area{display:flex;flex:1;min-height:0;overflow:hidden}
 
 /* Left column: full height */
-#left-col{width:240px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.15);overflow:hidden}
+#left-col{width:24vw;min-width:160px;max-width:260px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.15);overflow:hidden}
 #panel-hw{display:flex;flex-direction:column;flex:1;overflow:hidden}
 #panel-hop{display:none;flex-direction:column;flex:1;overflow:hidden;padding:3px;gap:3px}
 
@@ -126,7 +126,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 #center-strip{flex:1;display:flex;overflow:hidden}
 
 /* Circles + shortcuts col */
-#circles-col{width:100px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.1);padding:3px;gap:3px}
+#circles-col{width:10vw;min-width:70px;max-width:110px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.1);padding:3px;gap:3px}
 .circles-row{display:flex;gap:3px;align-items:center;flex:1}
 .circle-stack{display:flex;flex-direction:column;gap:3px;align-items:center}
 .prop-circle{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.3);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:9px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s;position:relative;flex-shrink:0}
@@ -199,7 +199,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 #pass-main.active-bar{background:rgba(255,215,0,.15)}
 
 /* ── BOTTOM SECTION ── */
-#bottom-section{display:flex;flex-direction:row;flex-shrink:0;height:calc(66.667vh * 2 / 16);min-height:29px;max-height:53px;background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.1)}
+#bottom-section{display:flex;flex-direction:row;flex-shrink:0;height:calc(100vh * 2 / 16);background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.1)}
 #bottom-left{flex:1;display:flex;flex-direction:column;min-width:0}
 #history-strip{display:flex;align-items:center;padding:2px 4px;gap:4px;background:rgba(0,0,0,.35);border-bottom:0.5px solid rgba(255,255,255,.1);flex:1;min-height:0}
 #roll-history{display:flex;gap:3px;overflow-x:auto;flex:1;scrollbar-width:none;align-items:center}
@@ -373,11 +373,11 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
       </div>
       <!-- Dice (2u) + Roll'em All (1u) stacked -->
       <div id="dice-zone" style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;gap:0">
-        <div id="dice-canvas-wrap" style="flex:2;display:flex;align-items:center;justify-content:center;position:relative;width:160px">
+        <div id="dice-canvas-wrap" style="flex:2;display:flex;align-items:center;justify-content:center;position:relative;width:min(160px,14vw)">
           <canvas id="dice-canvas" width="160" height="56" style="width:100%;height:100%;object-fit:contain"></canvas>
           <div id="dice-sum-overlay">—</div>
         </div>
-        <div class="lr-bonus-wrap" style="width:160px;flex:1;flex-shrink:0">
+        <div class="lr-bonus-wrap" style="width:min(160px,14vw);flex:1;flex-shrink:0">
           <div class="rollem-all-bar" id="bbonus-all-bar" onclick="bonusBet('all')" style="width:100%;height:100%">
             <div><span class="lr-title" style="font-size:8px">Roll'em All</span><span class="lr-pay">156 for 1</span></div>
             <span class="lr-stake" id="bstk-all" style="font-size:10px"></span>
