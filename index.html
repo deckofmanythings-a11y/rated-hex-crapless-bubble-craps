@@ -297,6 +297,15 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
       <div class="winner-tap">tap to dismiss</div>
     </div>
   </div>
+  <div class="modal-overlay hidden" id="modal-cap">
+    <div class="modal-box dark" style="text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">🎰</div>
+      <div class="modal-title" style="font-size:15px;text-align:center">Bankroll Capped at $100</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.6);margin:10px 0 16px">You've hit the seed money limit. Get a code from Deck to uncap your account and keep your winnings.</div>
+      <button class="modal-submit" onclick="closeCapModal();openRedeemModal(false)">Redeem a Code</button>
+      <button class="modal-btn cancel" onclick="closeCapModal()" style="margin-top:8px">Maybe Later</button>
+    </div>
+  </div>
   <div class="modal-overlay hidden" id="modal-odds">
     <div class="modal-box">
       <div class="modal-title" id="modal-odds-title">Odds</div>
@@ -682,6 +691,8 @@ function tapWinnerModal(){
 function closeWinnerModal(){document.getElementById('modal-winner').classList.add('hidden');document.getElementById('modal-winner').onclick=null;if(winnerTimer){clearTimeout(winnerTimer);winnerTimer=null;}}
 
 // ── MODALS ────────────────────────────────────────────────────────────────────
+function openCapModal(){document.getElementById('modal-cap').classList.remove('hidden');}
+function closeCapModal(){document.getElementById('modal-cap').classList.add('hidden');}
 function openLogModal(){document.getElementById('modal-log').classList.remove('hidden');}
 function closeLogModal(){document.getElementById('modal-log').classList.add('hidden');}
 function addLog(t,c){const el=document.getElementById('log');const p=document.createElement('p');p.className=c||'';p.textContent=t;el.prepend(p);while(el.children.length>80)el.removeChild(el.lastChild);}
@@ -1068,6 +1079,7 @@ async function rollDice(){
     document.getElementById('roll-btn').disabled=false;
     updateUI();checkBroke();
     if(data.returned>0)showWinnerModal(data.returned);
+    if(data.capped)setTimeout(openCapModal, data.returned>0?4200:300);
   });
 }
 
