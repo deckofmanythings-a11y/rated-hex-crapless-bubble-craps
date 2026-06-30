@@ -143,19 +143,19 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 .sc-btn.on{background:rgba(100,200,100,.25);border-color:#7ee87e;color:#7ee87e}
 
 /* Main right */
-#main-right{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#main-right{flex:1;display:flex;flex-direction:column;overflow:hidden;padding:3px 3px 3px 0}
 
 /* Number strip */
-#num-zone{flex-shrink:0}
-#puck-row-h{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;padding:1px 3px 0;height:14px}
-#num-strip-h{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;padding:0 3px 2px}
-.num-box{border:0.5px solid rgba(255,255,255,.2);border-radius:3px;overflow:hidden;background:rgba(0,0,0,.2);display:flex;flex-direction:column}
+#num-zone{flex:5;display:flex;flex-direction:column;min-height:0}
+#puck-row-h{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;padding:1px 3px 0;height:12px;flex-shrink:0}
+#num-strip-h{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;padding:0 3px 2px;flex:1;min-height:0}
+.num-box{border:0.5px solid rgba(255,255,255,.2);border-radius:3px;overflow:hidden;background:rgba(0,0,0,.2);display:flex;flex-direction:column;height:100%}
 .num-box.is-point{border:2px solid #fff;box-shadow:0 0 5px rgba(255,255,255,.4)}
-.nb-buy{background:rgba(0,80,180,.2);border-bottom:0.5px solid rgba(255,255,255,.1);padding:1px 2px;cursor:pointer;text-align:center;min-height:18px;display:flex;flex-direction:column;justify-content:center;position:relative;transition:background .12s}
+.nb-buy{background:rgba(0,80,180,.2);border-bottom:0.5px solid rgba(255,255,255,.1);padding:1px 2px;cursor:pointer;text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;transition:background .12s}
 .nb-buy:hover{background:rgba(0,80,180,.45)}
 .nb-buy.active{background:rgba(0,120,255,.4)}
-.nb-mid{background:rgba(255,255,255,.07);border-bottom:0.5px solid rgba(255,255,255,.1);text-align:center;padding:1px;font-size:11px;font-weight:700;min-height:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-.nb-place{background:rgba(0,0,0,.15);padding:1px 2px;cursor:pointer;text-align:center;min-height:18px;display:flex;flex-direction:column;justify-content:center;position:relative;transition:background .12s}
+.nb-mid{background:rgba(255,255,255,.07);border-bottom:0.5px solid rgba(255,255,255,.1);text-align:center;padding:1px;font-size:11px;font-weight:700;flex:3;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.nb-place{background:rgba(0,0,0,.15);padding:1px 2px;cursor:pointer;text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;transition:background .12s}
 .nb-place:hover{background:rgba(255,255,255,.1)}
 .nb-place.active{background:rgba(255,215,0,.22)}
 .nb-lbl{font-size:6px;color:rgba(255,255,255,.4);display:block}
@@ -178,17 +178,17 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
 .come-rm{display:none;position:absolute;top:0;right:0;width:9px;height:9px;border-radius:2px;background:rgba(120,0,0,.7);color:#ff9a9a;font-size:7px;line-height:8px;text-align:center;cursor:pointer;z-index:5;padding:0}
 
 /* Come / Field / Pass */
-#cfp-zone{flex:1;display:flex;flex-direction:column;min-height:0}
+#cfp-zone{flex:9;display:flex;flex-direction:column;min-height:0;padding:0 3px 3px 3px}
 .zone-bar{cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s;position:relative;flex-shrink:0}
 .zone-bar:hover{background:rgba(255,255,255,.06)}
 .zone-bar.active-bar{background:rgba(255,215,0,.12)}
 .zone-name{font-size:13px;font-weight:900;letter-spacing:.1em;color:#fff}
 .zone-stk{font-size:10px;color:#ffd700;min-height:12px;margin-top:1px}
 .zone-note{font-size:8px;color:rgba(255,100,100,.8)}
-#come-bar{border-bottom:1px solid rgba(255,255,255,.1);flex:1;min-height:28px;display:flex;align-items:center;justify-content:center;flex-direction:column}
-#field-bar{border-bottom:1px solid rgba(255,255,255,.1);flex:1;min-height:28px;background:rgba(60,40,0,.3);display:flex;align-items:center;justify-content:center;flex-direction:column}
+#come-bar{flex:2;min-height:0;display:flex;align-items:center;justify-content:center;flex-direction:column;border-radius:4px;background:rgba(0,80,180,.15);border:0.5px solid rgba(100,160,255,.3)}
+#field-bar{flex:2;min-height:0;background:rgba(60,40,0,.3);display:flex;align-items:center;justify-content:center;flex-direction:column;border-radius:4px;border:0.5px solid rgba(255,200,0,.2)}
 .field-info{font-size:8px;color:rgba(255,255,255,.45);margin-top:1px}
-#pass-bar{display:flex;align-items:stretch;flex:1;min-height:28px}
+#pass-bar{display:flex;align-items:stretch;flex:2;min-height:0;border-radius:4px;overflow:hidden;border:0.5px solid rgba(100,160,255,.3)}
 #pass-odds-cell{background:rgba(0,50,140,.4);border-right:1px solid rgba(100,160,255,.3);padding:3px 5px;cursor:pointer;text-align:center;width:48px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;transition:background .12s}
 #pass-odds-cell:hover{background:rgba(0,80,220,.4)}
 #pass-odds-cell.active{background:rgba(0,100,255,.4)}
@@ -525,11 +525,13 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
           <div id="puck-row-h"></div>
           <div id="num-strip-h"></div>
         </div>
-        <!-- Come / Field / Pass -->
+        <!-- Come / Field / Pass with 1-unit spacers -->
         <div id="cfp-zone">
+          <div style="flex:1;min-height:0"></div>
           <div class="zone-bar" id="come-bar" onclick="placeBet('come')">
             <div style="text-align:center"><div class="zone-name">COME</div><div class="zone-stk" id="stk-come"></div></div>
           </div>
+          <div style="flex:1;min-height:0"></div>
           <div class="zone-bar" id="field-bar" onclick="placeBet('field')">
             <div style="text-align:center">
               <div style="font-size:8px;color:rgba(255,255,255,.55)">2 · 3 · 4 · 9 · 10 · 11 · 12</div>
@@ -539,6 +541,7 @@ html,body{height:100%;overflow:hidden;font-family:system-ui,sans-serif;backgroun
             </div>
             <button class="mbtn" id="m-field" onclick="event.stopPropagation();removeBet('field')" style="top:3px;right:3px">−</button>
           </div>
+          <div style="flex:1;min-height:0"></div>
           <div id="pass-bar">
             <div id="pass-odds-cell" onclick="openPassOddsManual()">
               <span class="odds-lbl">ODDS</span>
