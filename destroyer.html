@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Rated Hex Destroyer: Naval Strike</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-serif;background:#0a0a12;color:#fff;position:fixed;width:100%}
+
+/* ── AUTH ── */
+#auth-screen{display:flex;align-items:center;justify-content:center;height:100vh;padding:20px}
+.auth-box{background:#1a1a1a;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:28px 24px;width:100%;max-width:340px}
+.auth-box h1{font-size:34px;font-weight:700;color:#4a9eff;margin-bottom:3px}
+.auth-box p{font-size:21px;color:rgba(255,255,255,.4);margin-bottom:20px}
+.auth-tabs{display:flex;margin-bottom:16px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+.auth-tab{flex:1;padding:7px;text-align:center;font-size:23px;cursor:pointer;background:transparent;color:rgba(255,255,255,.5);border:none}
+.auth-tab.active{background:rgba(74,158,255,.15);color:#4a9eff}
+.auth-field{margin-bottom:12px}
+.auth-field label{display:block;font-size:19px;color:rgba(255,255,255,.5);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.auth-field input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:8px 10px;color:#fff;font-size:24px;outline:none}
+.auth-field input:focus{border-color:rgba(74,158,255,.5)}
+.auth-btn{width:100%;background:#1a5faa;border:none;border-radius:7px;color:#fff;font-size:24px;font-weight:700;padding:10px;cursor:pointer;margin-top:4px}
+.auth-btn:disabled{opacity:.5;cursor:not-allowed}
+.auth-error{background:rgba(180,0,0,.25);border:1px solid rgba(255,80,80,.3);border-radius:6px;padding:8px 10px;font-size:21px;color:#ff9a9a;margin-bottom:12px;display:none}
+
+/* ── GAME SCREEN ── */
+#game-screen{display:none;height:100vh;height:100dvh;width:100vw;flex-direction:column;overflow:hidden;background:#0a0a18}
+
+/* ── TOP ROW ── */
+#top-row{display:flex;flex-shrink:0;height:calc(100dvh*3/16);border-bottom:1px solid rgba(255,255,255,.12);min-height:48px;max-height:72px}
+#top-left{width:72px;flex-shrink:0;background:rgba(0,0,0,.35);border-right:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px}
+.tl-lbl{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.04em}
+.tl-val{font-size:15px;font-weight:700;color:#4a9eff;line-height:1.1}
+.tl-sub{font-size:9px;color:rgba(74,158,255,.5)}
+#top-center{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 8px;background:rgba(0,0,0,.2)}
+.dice-display{display:flex;gap:4px;align-items:center}
+.die-box{width:36px;height:36px;border-radius:5px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;transition:all .3s}
+.die-box.hit{background:rgba(255,100,0,.3);border-color:#ff6400;color:#ff9944}
+.die-box.miss{background:rgba(30,60,120,.3);border-color:#4a9eff;color:#88bbff}
+.die-box.rolling{animation:dieRoll .4s infinite}
+@keyframes dieRoll{0%{transform:rotate(0deg)}25%{transform:rotate(5deg)}75%{transform:rotate(-5deg)}100%{transform:rotate(0deg)}}
+#last-result-text{font-size:12px;color:rgba(255,255,255,.5);text-align:center;min-width:80px}
+#top-right{width:100px;flex-shrink:0;background:rgba(0,0,0,.3);border-left:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;justify-content:space-around;padding:4px 7px}
+.hud-item{display:flex;flex-direction:column}
+.hud-lbl{font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;line-height:1}
+.hud-val{font-size:16px;font-weight:600;line-height:1.25}
+
+/* ── MAIN AREA ── */
+#main-area{flex:1;display:flex;min-height:0;overflow:hidden}
+
+/* ── GRID ── */
+#grid-panel{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;gap:3px}
+#col-labels{display:flex;margin-left:22px;gap:2px;width:100%;max-width:300px}
+.col-label{flex:1;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em}
+#grid-rows{display:flex;flex-direction:column;gap:2px;width:100%;max-width:300px}
+.grid-row{display:flex;gap:2px;align-items:center}
+.row-label{width:18px;flex-shrink:0;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.4)}
+.grid-cell{flex:1;aspect-ratio:1;border-radius:3px;border:0.5px solid rgba(255,255,255,.15);background:rgba(0,20,60,.4);cursor:default;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;position:relative}
+.grid-cell.ship{background:rgba(40,80,160,.5);border-color:rgba(74,158,255,.5)}
+.grid-cell.hit{background:rgba(255,80,0,.5);border-color:#ff6400}
+.grid-cell.miss{background:rgba(0,40,100,.3);border-color:rgba(74,158,255,.3)}
+.grid-cell.targeted{box-shadow:0 0 0 2px #fff;z-index:1}
+.grid-cell.ship::after{content:'🚢';font-size:10px;opacity:.6}
+.grid-cell.hit::after{content:'💥';font-size:12px}
+.grid-cell.miss::after{content:'💧';font-size:10px;opacity:.6}
+
+/* ── RIGHT PANEL (ship status + controls) ── */
+#right-panel{width:130px;flex-shrink:0;display:flex;flex-direction:column;gap:4px;padding:6px;border-left:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.2);overflow-y:auto}
+#missiles-display{text-align:center;padding:4px;background:rgba(0,20,60,.4);border-radius:4px;border:0.5px solid rgba(74,158,255,.3)}
+.missiles-count{font-size:28px;font-weight:700;color:#4a9eff;line-height:1}
+.missiles-lbl{font-size:9px;color:rgba(74,158,255,.5);text-transform:uppercase;letter-spacing:.05em}
+.missile-icon{display:inline-block;font-size:14px}
+#ship-status{display:flex;flex-direction:column;gap:3px}
+.ship-card{background:rgba(0,20,60,.4);border:0.5px solid rgba(74,158,255,.2);border-radius:3px;padding:3px 5px}
+.ship-card.sunk{background:rgba(180,40,0,.25);border-color:rgba(255,100,0,.4);opacity:.7}
+.ship-name{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.04em}
+.ship-hp{display:flex;gap:2px;margin-top:2px}
+.hp-sq{width:10px;height:10px;border-radius:1px;background:rgba(74,158,255,.4);border:0.5px solid rgba(74,158,255,.6)}
+.hp-sq.hit{background:rgba(255,80,0,.7);border-color:#ff6400}
+.ship-payout{font-size:8px;color:rgba(255,215,0,.5);margin-top:1px}
+#controls{display:flex;flex-direction:column;gap:3px;margin-top:auto}
+#fire-btn{background:linear-gradient(180deg,#ff6400,#cc4400);border:none;border-radius:5px;color:#fff;font-size:16px;font-weight:900;padding:8px 4px;cursor:pointer;letter-spacing:.05em;width:100%}
+#fire-btn:disabled{opacity:.4;cursor:not-allowed}
+#fire-btn:not(:disabled):hover{background:linear-gradient(180deg,#ff7a20,#dd5500)}
+#buy-btn{background:rgba(74,158,255,.15);border:1px solid rgba(74,158,255,.4);border-radius:5px;color:#4a9eff;font-size:11px;font-weight:700;padding:5px 3px;cursor:pointer;width:100%;text-align:center;line-height:1.3}
+#buy-btn:disabled{opacity:.3;cursor:not-allowed}
+#buy-btn:not(:disabled):hover{background:rgba(74,158,255,.25)}
+#pnl-display{font-size:11px;font-weight:700;text-align:center;color:#7ee87e;padding:2px}
+
+/* ── PLACEMENT SCREEN ── */
+#placement-overlay{position:absolute;inset:0;background:rgba(0,0,10,.92);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+#placement-overlay.hidden{display:none}
+.placement-title{font-size:28px;font-weight:700;color:#4a9eff;letter-spacing:.05em}
+.placement-sub{font-size:17px;color:rgba(255,255,255,.5)}
+#placement-grid-wrap{position:relative}
+#placement-col-labels{display:flex;margin-left:22px;gap:2px;max-width:260px;width:100%}
+#placement-rows{display:flex;flex-direction:column;gap:2px;max-width:260px;width:100%}
+.p-col-label{flex:1;text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.4)}
+.p-row{display:flex;gap:2px;align-items:center}
+.p-row-label{width:18px;text-align:center;font-size:11px;color:rgba(255,255,255,.4)}
+.p-cell{flex:1;aspect-ratio:1;border-radius:3px;border:0.5px solid rgba(255,255,255,.12);background:rgba(0,20,60,.4);display:flex;align-items:center;justify-content:center;font-size:12px}
+.p-cell.ship{background:rgba(40,80,160,.6);border-color:rgba(74,158,255,.6)}
+.p-cell.ship::after{content:'🚢';font-size:9px;opacity:.7}
+.placement-btns{display:flex;gap:8px}
+.placement-btn{padding:8px 20px;border-radius:6px;font-size:18px;font-weight:700;cursor:pointer;border:none}
+#re-randomize-btn{background:rgba(74,158,255,.2);border:1px solid rgba(74,158,255,.5);color:#4a9eff}
+#start-battle-btn{background:linear-gradient(180deg,#ff6400,#cc4400);color:#fff}
+.bet-row{display:flex;align-items:center;gap:8px}
+.bet-lbl{font-size:17px;color:rgba(255,255,255,.5)}
+#bet-input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:5px;color:#fff;font-size:24px;font-weight:700;padding:5px 10px;width:100px;text-align:center;outline:none}
+#bet-input:focus{border-color:rgba(74,158,255,.5)}
+
+/* ── DONE OVERLAY ── */
+#done-overlay{position:absolute;inset:0;background:rgba(0,0,10,.9);z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+#done-overlay.hidden{display:none}
+.done-title{font-size:26px;font-weight:700;color:#4a9eff}
+.done-payout{font-size:40px;font-weight:900;color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,.5)}
+.done-detail{font-size:15px;color:rgba(255,255,255,.55);text-align:center;max-width:280px}
+#play-again-btn{background:linear-gradient(180deg,#1a5faa,#0d3d7a);border:1px solid rgba(74,158,255,.5);color:#fff;font-size:22px;font-weight:700;padding:10px 30px;border-radius:7px;cursor:pointer;margin-top:4px}
+
+/* ── LOG STRIP ── */
+#log-strip{display:flex;align-items:center;padding:2px 4px;gap:4px;background:rgba(0,0,0,.4);border-bottom:0.5px solid rgba(255,255,255,.1);flex-shrink:0;height:22px}
+.log-line{font-size:11px;color:rgba(255,255,255,.55);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.log-line.hit{color:#ff9944}
+.log-line.miss{color:#88bbff}
+.log-line.info{color:#4a9eff}
+
+/* ── BOTTOM BAR ── */
+#bottom-section{display:flex;flex-shrink:0;height:calc(100dvh*2/16);background:rgba(0,0,0,.5);border-top:1px solid rgba(255,255,255,.1);min-height:44px;max-height:68px}
+#bottom-left{flex:1;display:flex;flex-direction:column;min-width:0}
+#bottom-bar{display:flex;align-items:center;gap:3px;padding:2px 4px;flex:1}
+.nav-btn{background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.2);border-radius:3px;color:rgba(255,255,255,.55);font-size:10px;font-weight:700;padding:2px 4px;cursor:pointer;white-space:nowrap;flex-shrink:0;line-height:1.2;text-align:center}
+.nav-btn:hover{background:rgba(255,255,255,.14)}
+.nav-btn.active-game{border-color:#4a9eff;color:#4a9eff;background:rgba(74,158,255,.12)}
+.chip{width:22px;height:22px;border-radius:50%;font-size:8px;font-weight:700;cursor:pointer;border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;transition:transform .1s}
+.chip:hover{transform:scale(1.1)}
+.chip.sel{transform:scale(1.15);box-shadow:0 0 0 2px #4a9eff}
+.bar-btn{background:rgba(255,255,255,.1);border:0.5px solid rgba(255,255,255,.22);border-radius:3px;color:#fff;font-size:11px;padding:3px 6px;cursor:pointer;flex-shrink:0;height:24px}
+#hud-pnl-bottom{font-size:13px;font-weight:700;color:#7ee87e;flex-shrink:0;padding:0 3px}
+
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;padding:12px}
+.modal-overlay.hidden{display:none}
+.modal-box{background:#0d1b2e;border:1px solid rgba(74,158,255,.3);border-radius:10px;padding:14px 16px;width:100%;max-width:360px}
+.modal-title{font-size:22px;font-weight:700;color:#4a9eff;margin-bottom:8px}
+.modal-sub{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:10px}
+.modal-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:5px;color:#fff;font-size:18px;padding:7px 4px;cursor:pointer;text-align:center;width:100%}
+.modal-btn.cancel{background:rgba(180,0,0,.2);border-color:rgba(255,80,80,.3);margin-top:4px}
+.modal-input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:5px;padding:8px 10px;color:#fff;font-size:24px;outline:none;margin-bottom:8px;text-align:center;letter-spacing:.1em;text-transform:uppercase}
+.modal-input:focus{border-color:rgba(74,158,255,.5)}
+.modal-input-error{font-size:16px;color:#ff9a9a;margin-bottom:8px;min-height:12px;text-align:center}
+.modal-submit{width:100%;background:#1a5faa;border:none;border-radius:6px;color:#fff;font-size:22px;font-weight:700;padding:9px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <h1>⚓ Destroyer</h1>
+    <p>Naval Strike</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="showTab('login')">Log In</button>
+      <button class="auth-tab" id="tab-register" onclick="showTab('register')">Create Account</button>
+    </div>
+    <div id="auth-error" class="auth-error"></div>
+    <div class="auth-field"><label>Username</label><input type="text" id="auth-username" placeholder="your name"></div>
+    <div class="auth-field"><label>Password</label><input type="password" id="auth-password" placeholder="••••••••"></div>
+    <button class="auth-btn" id="auth-btn" onclick="handleAuth()">Log In</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game-screen" style="position:relative">
+
+  <!-- PLACEMENT OVERLAY -->
+  <div id="placement-overlay">
+    <div class="placement-title">⚓ BATTLE STATIONS</div>
+    <div class="placement-sub">Ships placed randomly. Fire when ready.</div>
+    <div class="bet-row">
+      <span class="bet-lbl">Bet $</span>
+      <input type="number" id="bet-input" value="5" min="1" step="1">
+    </div>
+    <div id="placement-col-labels"></div>
+    <div id="placement-rows"></div>
+    <div class="placement-btns">
+      <button class="placement-btn" id="re-randomize-btn" onclick="reRandomize()">🎲 Re-randomize</button>
+      <button class="placement-btn" id="start-battle-btn" onclick="startBattle()">🚀 FIRE!</button>
+    </div>
+  </div>
+
+  <!-- DONE OVERLAY -->
+  <div id="done-overlay" class="hidden">
+    <div class="done-title">BATTLE OVER</div>
+    <div class="done-payout" id="done-payout-text">+$0.00</div>
+    <div class="done-detail" id="done-detail-text"></div>
+    <button id="play-again-btn" onclick="playAgain()">Play Again</button>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay hidden" id="modal-cap">
+    <div class="modal-box" style="text-align:center">
+      <div style="font-size:50px;margin-bottom:8px">⚓</div>
+      <div class="modal-title" style="text-align:center">Bankroll Capped at $100</div>
+      <div style="font-size:18px;color:rgba(255,255,255,.6);margin:10px 0 16px">Get a code from Deck to uncap your account.</div>
+      <button class="modal-submit" onclick="closeCapModal();openRedeemModal(false)">Redeem a Code</button>
+      <button class="modal-btn cancel" onclick="closeCapModal()">Maybe Later</button>
+    </div>
+  </div>
+  <div class="modal-overlay hidden" id="modal-redeem">
+    <div class="modal-box">
+      <div class="modal-title" id="redeem-title">Redeem a Code</div>
+      <div class="modal-sub" id="redeem-sub">Enter the code Deck sent you.</div>
+      <input class="modal-input" id="redeem-input" type="text" placeholder="RH-XXXXXXXX" maxlength="11" oninput="this.value=this.value.toUpperCase()">
+      <div class="modal-input-error" id="redeem-error"></div>
+      <button class="modal-submit" id="redeem-btn" onclick="redeemCode()">Redeem</button>
+      <button class="modal-btn cancel" id="redeem-cancel" onclick="closeRedeemModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- TOP ROW -->
+  <div id="top-row">
+    <div id="top-left">
+      <div class="tl-lbl">Playable</div>
+      <div class="tl-val" id="hud-bankroll">$0</div>
+      <div class="tl-sub" id="hud-bet-top">Bet: $0</div>
+    </div>
+    <div id="top-center">
+      <div class="dice-display">
+        <div class="die-box" id="die-letter">—</div>
+        <div class="die-box" id="die-number">—</div>
+      </div>
+      <div id="last-result-text">Place ships<br>to begin</div>
+    </div>
+    <div id="top-right">
+      <div class="hud-item"><div class="hud-lbl">Last Win</div><div class="hud-val" id="hud-lastwin" style="color:#7ee87e">—</div></div>
+      <div class="hud-item"><div class="hud-lbl">Missiles</div><div class="hud-val" id="hud-missiles" style="color:#4a9eff">4</div></div>
+      <div class="hud-item"><div class="hud-lbl">P&L</div><div class="hud-val" id="hud-pnl-top" style="color:#7ee87e">+$0</div></div>
+    </div>
+  </div>
+
+  <!-- MAIN AREA -->
+  <div id="main-area">
+    <!-- BATTLE GRID -->
+    <div id="grid-panel">
+      <div id="col-labels"></div>
+      <div id="grid-rows"></div>
+    </div>
+    <!-- RIGHT PANEL -->
+    <div id="right-panel">
+      <div id="missiles-display">
+        <div class="missiles-count" id="missiles-count">4</div>
+        <div class="missiles-lbl">Missiles</div>
+      </div>
+      <div id="ship-status"></div>
+      <div id="controls">
+        <div id="pnl-display">+$0.00</div>
+        <button id="fire-btn" onclick="fireMissile()" disabled>🚀 FIRE</button>
+        <button id="buy-btn" onclick="buyMissile()" disabled></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG STRIP + BOTTOM -->
+  <div id="log-strip"><div class="log-line" id="last-log">—</div></div>
+  <div id="bottom-section">
+    <div id="bottom-left">
+      <div id="bottom-bar">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;flex-shrink:0;padding-right:3px">
+          <button class="nav-btn" onclick="window.location.href='index.html'" style="text-align:center;line-height:1.2">CRAPLESS<span style="display:block;font-size:7px;font-weight:400;opacity:.6">No naturals</span></button>
+          <button class="nav-btn" onclick="window.location.href='index.html'" style="text-align:center;line-height:1.2">STANDARD<span style="display:block;font-size:7px;font-weight:400;opacity:.6">7 &amp; 11 win</span></button>
+          <button class="nav-btn" onclick="window.location.href='sicbo.html'" style="text-align:center;line-height:1.2">SIC-BO<span style="display:block;font-size:7px;font-weight:400;opacity:.6">3 dice</span></button>
+          <button class="nav-btn active-game" style="text-align:center;line-height:1.2">DESTROYER<span style="display:block;font-size:7px;font-weight:400;opacity:.7">Naval Strike</span></button>
+        </div>
+        <div class="chip" style="background:#b0b0b0;color:#222;border-color:#888" data-val="1" onclick="selectChip(1)">$1</div>
+        <div class="chip" style="background:#c0392b;border-color:#922b21" data-val="5" onclick="selectChip(5)">$5</div>
+        <div class="chip" style="background:#f39c12;border-color:#d68910;color:#111" data-val="10" onclick="selectChip(10)">$10</div>
+        <div class="chip" style="background:#27ae60;border-color:#1e8449" data-val="25" onclick="selectChip(25)">$25</div>
+        <div class="chip" style="background:#7d4f30;border-color:#5d3a22" data-val="50" onclick="selectChip(50)">$50</div>
+        <div class="chip" style="background:#2c2c2c;border-color:#111" data-val="100" onclick="selectChip(100)">$100</div>
+        <div style="flex:1"></div>
+        <span id="hud-pnl-bottom" style="font-size:13px;font-weight:700;color:#7ee87e;padding:0 3px">+$0.00</span>
+        <button class="bar-btn" onclick="openRedeemModal(false)" style="border-color:rgba(74,158,255,.4);color:#4a9eff">Redeem</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end game-screen -->
+
+<script>
+const SUPABASE_URL='https://qgiksiauptrqmxsupwqe.supabase.co';
+const FUNCTIONS_URL='https://qgiksiauptrqmxsupwqe.supabase.co/functions/v1';
+const SUPABASE_ANON_KEY='sb_publishable_4J7VSDzSm3cA3aWHF7hAEg_gC1BKOp_';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+const r2=n=>Math.round(n*100)/100;
+const fmt=n=>'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtS=n=>'$'+Math.abs(n).toFixed(0);
+
+// ── CONSTANTS ────────────────────────────────────────────────────────────────
+const SHIP_LENGTHS=[2,3,3,4];
+const SHIP_NAMES=['Destroyer','Battleship','Battleship','Carrier'];
+const SHIP_DISPLAY_NAMES=['Destroyer','Battleship 1','Battleship 2','Carrier'];
+const SHIP_PAYOUTS=[[0,0,3],[0,0,3,10],[0,0,3,10],[0,0,3,4,40]];
+const JACKPOT=[0,0,51,251,501];
+const GRID_SIZE=6;
+const MAX_BUY=6;
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let G={
+  bankroll:0,startingBankroll:0,chip:5,
+  phase:'placement',
+  ships:null,
+  grid:null,
+  shipHits:[0,0,0,0],
+  shipSunk:[false,false,false,false],
+  missilesRemaining:4,
+  missilesBought:0,
+  sunkenCount:0,
+  bet:5,
+  lastWin:0,
+  buyPrice:0,
+  canBuy:false,
+  firing:false,
+};
+let currentPlayer=null,_authMode='login';
+
+// ── AUTH ─────────────────────────────────────────────────────────────────────
+function showTab(tab){
+  _authMode=tab;
+  document.getElementById('tab-login').classList.toggle('active',tab==='login');
+  document.getElementById('tab-register').classList.toggle('active',tab==='register');
+  document.getElementById('auth-btn').textContent=tab==='login'?'Log In':'Create Account';
+  document.getElementById('auth-error').style.display='none';
+}
+function showAuthError(msg){const el=document.getElementById('auth-error');el.textContent=msg;el.style.display='block';}
+async function handleAuth(){
+  const username=document.getElementById('auth-username').value.trim();
+  const password=document.getElementById('auth-password').value;
+  if(!username||!password){showAuthError('Please enter a username and password.');return;}
+  const btn=document.getElementById('auth-btn');btn.disabled=true;btn.textContent='Please wait...';
+  try{
+    if(_authMode==='register')await registerPlayer(username,password);
+    else await loginPlayer(username,password);
+  }catch(e){
+    showAuthError(e.message||'Something went wrong.');
+    btn.disabled=false;btn.textContent=_authMode==='login'?'Log In':'Create Account';
+  }
+}
+async function hashPassword(p){const e=new TextEncoder().encode(p);const b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+function generateToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');}
+async function registerPlayer(username,password){
+  const{data:ex}=await sb.from('players').select('id').eq('username',username).maybeSingle();
+  if(ex)throw new Error('That username is already taken.');
+  const hash=await hashPassword(password);const token=generateToken();
+  const expires=new Date(Date.now()+30*24*60*60*1000).toISOString();
+  const{data,error}=await sb.from('players').insert({username,password_hash:hash,bankroll:20,net_pnl:0,total_redeemed:0,session_token:token,session_expires:expires}).select().single();
+  if(error)throw new Error('Could not create account: '+error.message);
+  localStorage.setItem('craps_session',token);startSession(data);
+}
+async function loginPlayer(username,password){
+  const hash=await hashPassword(password);
+  const{data,error}=await sb.from('players').select('*').eq('username',username).single();
+  if(error||!data)throw new Error('Username not found.');
+  if(data.password_hash!==hash)throw new Error('Incorrect password.');
+  const token=generateToken();const expires=new Date(Date.now()+30*24*60*60*1000).toISOString();
+  await sb.from('players').update({session_token:token,session_expires:expires}).eq('id',data.id);
+  localStorage.setItem('craps_session',token);startSession({...data,session_token:token,session_expires:expires});
+}
+async function tryRestoreSession(){
+  const token=localStorage.getItem('craps_session');if(!token)return;
+  const{data,error}=await sb.from('players').select('*').eq('session_token',token).maybeSingle();
+  if(error||!data){localStorage.removeItem('craps_session');return;}
+  if(new Date(data.session_expires)<new Date()){localStorage.removeItem('craps_session');return;}
+  startSession(data);
+}
+
+// ── REDEEM ────────────────────────────────────────────────────────────────────
+function openRedeemModal(broke){
+  document.getElementById('redeem-input').value='';document.getElementById('redeem-error').textContent='';
+  document.getElementById('redeem-btn').disabled=false;document.getElementById('redeem-btn').textContent='Redeem';
+  if(broke){document.getElementById('redeem-title').textContent='Out of Chips!';document.getElementById('redeem-sub').textContent='Get a code from Deck to continue playing.';document.getElementById('redeem-cancel').style.display='none';}
+  else{document.getElementById('redeem-title').textContent='Redeem a Code';document.getElementById('redeem-sub').textContent='Enter the code Deck sent you.';document.getElementById('redeem-cancel').style.display='block';}
+  document.getElementById('modal-redeem').classList.remove('hidden');
+}
+function closeRedeemModal(){document.getElementById('modal-redeem').classList.add('hidden');}
+function closeCapModal(){document.getElementById('modal-cap').classList.add('hidden');}
+async function redeemCode(){
+  const code=document.getElementById('redeem-input').value.trim().toUpperCase();
+  const errEl=document.getElementById('redeem-error');const btn=document.getElementById('redeem-btn');
+  errEl.textContent='';if(!code){errEl.textContent='Please enter a code.';return;}
+  btn.disabled=true;btn.textContent='Checking...';
+  const token=localStorage.getItem('craps_session');
+  let data;
+  try{
+    const res=await fetch(FUNCTIONS_URL+'/redeem',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON_KEY,'apikey':SUPABASE_ANON_KEY},
+      body:JSON.stringify({session_token:token,code})
+    });
+    data=await res.json();
+  }catch(e){errEl.textContent='Network error. Try again.';btn.disabled=false;btn.textContent='Redeem';return;}
+  if(!data.ok){errEl.textContent=data.message||'Could not redeem code.';btn.disabled=false;btn.textContent='Redeem';return;}
+  G.bankroll=data.newBankroll;G.startingBankroll=data.newTotalRedeemed;
+  if(currentPlayer){currentPlayer.bankroll=data.newBankroll;currentPlayer.total_redeemed=data.newTotalRedeemed;}
+  closeRedeemModal();addLog('Code redeemed! +'+fmt(data.value)+' added.','info');updateUI();
+  btn.disabled=false;btn.textContent='Redeem';
+}
+
+// ── SESSION ───────────────────────────────────────────────────────────────────
+function startSession(player){
+  currentPlayer=player;
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('game-screen').style.display='flex';
+  G.bankroll=parseFloat(player.bankroll)||0;
+  G.startingBankroll=parseFloat(player.total_redeemed)||0;
+  // Restore in-progress game if any
+  const gs=(player.game_state||{}).destroyer;
+  if(gs&&gs.phase==='firing'){
+    applyState(gs,G.bankroll);
+    G.canBuy=G.missilesRemaining===0&&G.missilesBought<MAX_BUY;
+    G.buyPrice=0; // will be fetched on next buy attempt
+    buildMainGrid();
+    renderMainGrid();
+    hidePlacementScreen();
+    addLog('Battle restored — continue firing!','info');
+  }else{
+    G.ships=randomizeLocal();
+    buildMainGrid();
+    renderPlacementGrid();
+    showPlacementScreen();
+  }
+  selectChip(G.chip);
+  updateUI();
+}
+async function logout(){
+  if(currentPlayer)await sb.from('players').update({session_token:null,session_expires:null}).eq('id',currentPlayer.id);
+  localStorage.removeItem('craps_session');currentPlayer=null;
+  resetGameState();
+  document.getElementById('game-screen').style.display='none';
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('auth-username').value='';
+  document.getElementById('auth-password').value='';
+}
+function resetGameState(){
+  G.phase='placement';G.ships=null;G.grid=null;
+  G.shipHits=[0,0,0,0];G.shipSunk=[false,false,false,false];
+  G.missilesRemaining=4;G.missilesBought=0;G.sunkenCount=0;
+  G.canBuy=false;G.buyPrice=0;G.firing=false;G.lastWin=0;
+}
+
+// ── CHIP SELECTION ────────────────────────────────────────────────────────────
+function selectChip(v){G.chip=v;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',+c.dataset.val===v));}
+
+// ── LOG ───────────────────────────────────────────────────────────────────────
+function addLog(t,cls){
+  const el=document.getElementById('last-log');
+  if(el){el.textContent=t;el.className='log-line '+(cls||'');}
+}
+
+// ── SHIP LOGIC ───────────────────────────────────────────────────────────────
+function randomizeLocal(){
+  const ships=[];const occupied=new Set();
+  for(let i=0;i<4;i++){
+    const len=SHIP_LENGTHS[i];let placed=false,attempts=0;
+    while(!placed&&attempts<1000){
+      attempts++;
+      const horiz=Math.random()<0.5;
+      const row=Math.floor(Math.random()*GRID_SIZE);
+      const col=Math.floor(Math.random()*GRID_SIZE);
+      const squares=[];let valid=true;
+      for(let j=0;j<len;j++){
+        const r=horiz?row:row+j,c=horiz?col+j:col;
+        if(r>=GRID_SIZE||c>=GRID_SIZE){valid=false;break;}
+        const k=r+','+c;if(occupied.has(k)){valid=false;break;}
+        squares.push([r,c]);
+      }
+      if(valid){squares.forEach(([r,c])=>occupied.add(r+','+c));ships.push(squares);placed=true;}
+    }
+    if(!placed)return randomizeLocal();
+  }
+  return ships;
+}
+function buildGrid(ships){
+  const g=Array.from({length:GRID_SIZE},()=>Array(GRID_SIZE).fill('empty'));
+  ships.forEach(ship=>ship.forEach(([r,c])=>{g[r][c]='ship';}));
+  return g;
+}
+
+// ── PLACEMENT SCREEN ──────────────────────────────────────────────────────────
+function showPlacementScreen(){document.getElementById('placement-overlay').classList.remove('hidden');}
+function hidePlacementScreen(){document.getElementById('placement-overlay').classList.add('hidden');}
+function reRandomize(){G.ships=randomizeLocal();renderPlacementGrid();}
+function renderPlacementGrid(){
+  const colLabels=document.getElementById('placement-col-labels');
+  const rowsEl=document.getElementById('placement-rows');
+  colLabels.innerHTML='<div style="width:18px;flex-shrink:0"></div>'+
+    'ABCDEF'.split('').map(l=>'<div class="p-col-label">'+l+'</div>').join('');
+  rowsEl.innerHTML='';
+  const tempGrid=buildGrid(G.ships);
+  for(let r=0;r<GRID_SIZE;r++){
+    const row=document.createElement('div');row.className='p-row';
+    const rl=document.createElement('div');rl.className='p-row-label';rl.textContent=r+1;row.appendChild(rl);
+    for(let c=0;c<GRID_SIZE;c++){
+      const cell=document.createElement('div');
+      cell.className='p-cell'+(tempGrid[r][c]==='ship'?' ship':'');
+      row.appendChild(cell);
+    }
+    rowsEl.appendChild(row);
+  }
+}
+
+// ── START BATTLE ──────────────────────────────────────────────────────────────
+async function startBattle(){
+  const betInput=document.getElementById('bet-input');
+  const bet=parseFloat(betInput.value)||0;
+  if(bet<=0){addLog('Enter a valid bet.','info');return;}
+  if(bet>G.bankroll){addLog('Bet exceeds bankroll.','info');return;}
+  const btn=document.getElementById('start-battle-btn');btn.disabled=true;
+  const token=localStorage.getItem('craps_session');
+  let data;
+  try{
+    const res=await fetch(FUNCTIONS_URL+'/roll-destroyer',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON_KEY,'apikey':SUPABASE_ANON_KEY},
+      body:JSON.stringify({session_token:token,action:'start',ships:G.ships,bet})
+    });
+    data=await res.json();
+  }catch(e){data={ok:false,message:'Network error.'};}
+  btn.disabled=false;
+  if(!data.ok){addLog(data.message||'Error.','info');return;}
+  applyState(data.state,data.newBankroll);
+  G.buyPrice=data.buyPrice||0;G.canBuy=false;
+  hidePlacementScreen();
+  renderMainGrid();
+  addLog('Battle stations! 4 missiles armed. Open fire!','info');
+  updateUI();
+}
+
+// ── FIRE ──────────────────────────────────────────────────────────────────────
+async function fireMissile(){
+  if(G.firing||G.phase!=='firing'||G.missilesRemaining<=0)return;
+  G.firing=true;
+  document.getElementById('fire-btn').disabled=true;
+  document.getElementById('buy-btn').disabled=true;
+  const dL=document.getElementById('die-letter'),dN=document.getElementById('die-number');
+  dL.className='die-box rolling';dN.className='die-box rolling';
+  dL.textContent='?';dN.textContent='?';
+  const token=localStorage.getItem('craps_session');
+  let data;
+  try{
+    const res=await fetch(FUNCTIONS_URL+'/roll-destroyer',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON_KEY,'apikey':SUPABASE_ANON_KEY},
+      body:JSON.stringify({session_token:token,action:'fire'})
+    });
+    data=await res.json();
+  }catch(e){data={ok:false,message:'Network error.'};}
+  G.firing=false;
+  if(!data.ok){
+    dL.className='die-box';dL.textContent='—';dN.className='die-box';dN.textContent='—';
+    addLog(data.message||'Error.','info');
+    updateUI();return;
+  }
+  const{roll,hit,done,finalPayout,newBankroll,state,buyPrice,canBuy,capped}=data;
+  // Land dice
+  setTimeout(()=>{
+    dL.className='die-box '+(hit?'hit':'miss');dL.textContent=roll.letter;
+    dN.className='die-box '+(hit?'hit':'miss');dN.textContent=roll.number;
+    document.getElementById('last-result-text').textContent=(hit?'💥 HIT!':'💧 Miss')+' '+roll.letter+roll.number;
+    // Flash target cell
+    const cellEl=document.querySelector('[data-r="'+roll.row+'"][data-c="'+roll.col+'"]');
+    if(cellEl){
+      cellEl.classList.add('targeted');
+      setTimeout(()=>{
+        cellEl.classList.remove('targeted');
+        cellEl.className='grid-cell '+(hit?'hit':'miss');
+      },350);
+    }
+  },200);
+  applyState(state,newBankroll);
+  G.buyPrice=buyPrice||0;G.canBuy=canBuy||false;
+  const logLine=state.log&&state.log.length?state.log[state.log.length-1]:'';
+  addLog(logLine,hit?'hit':'miss');
+  if(done){
+    G.phase='done';
+    const winnings=r2((state.bet||G.bet)*(finalPayout||0));
+    G.lastWin=winnings;
+    setTimeout(()=>showDoneOverlay(finalPayout,winnings,state),700);
+    if(capped)setTimeout(()=>document.getElementById('modal-cap').classList.remove('hidden'),2500);
+  }
+  if(currentPlayer)currentPlayer.bankroll=newBankroll;
+  updateUI();
+}
+
+// ── BUY MISSILE ───────────────────────────────────────────────────────────────
+async function buyMissile(){
+  if(G.firing||!G.canBuy||G.missilesRemaining>0)return;
+  if(G.buyPrice>G.bankroll){addLog('Insufficient bankroll for missile.','info');return;}
+  G.firing=true;
+  document.getElementById('buy-btn').disabled=true;
+  const token=localStorage.getItem('craps_session');
+  let data;
+  try{
+    const res=await fetch(FUNCTIONS_URL+'/roll-destroyer',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON_KEY,'apikey':SUPABASE_ANON_KEY},
+      body:JSON.stringify({session_token:token,action:'buy'})
+    });
+    data=await res.json();
+  }catch(e){data={ok:false,message:'Network error.'};}
+  G.firing=false;
+  if(!data.ok){addLog(data.message||'Error.','info');updateUI();return;}
+  applyState(data.state,data.newBankroll);
+  G.buyPrice=data.buyPrice||0;G.canBuy=data.canBuy||false;
+  const logLine=data.state.log&&data.state.log.length?data.state.log[data.state.log.length-1]:'Missile purchased.';
+  addLog(logLine,'info');
+  if(currentPlayer)currentPlayer.bankroll=data.newBankroll;
+  updateUI();
+}
+
+// ── APPLY STATE ───────────────────────────────────────────────────────────────
+function applyState(state,newBankroll){
+  if(newBankroll!==undefined)G.bankroll=r2(newBankroll);
+  if(!state)return;
+  G.phase=state.phase||G.phase;
+  G.ships=state.ships||G.ships;
+  G.grid=state.grid||G.grid;
+  G.shipHits=state.shipHits||[0,0,0,0];
+  G.shipSunk=state.shipSunk||[false,false,false,false];
+  G.missilesRemaining=state.missilesRemaining||0;
+  G.missilesBought=state.missilesBought||0;
+  G.sunkenCount=state.sunkenCount||0;
+  G.bet=state.bet||G.bet;
+}
+
+// ── DONE OVERLAY ──────────────────────────────────────────────────────────────
+function showDoneOverlay(finalPayout,winnings,state){
+  const overlay=document.getElementById('done-overlay');
+  const payEl=document.getElementById('done-payout-text');
+  const detEl=document.getElementById('done-detail-text');
+  payEl.textContent=(winnings>0?'+':'')+fmt(winnings);
+  payEl.style.color=winnings>0?'#ffd700':winnings<0?'#ff6060':'rgba(255,255,255,.5)';
+  const shipLines=SHIP_DISPLAY_NAMES.map((n,i)=>n+': '+(state.shipHits[i]||0)+'/'+SHIP_LENGTHS[i]).join(' · ');
+  detEl.textContent=state.sunkenCount+' ship'+(state.sunkenCount!==1?'s':'')+' sunk · '+shipLines;
+  overlay.classList.remove('hidden');
+}
+function playAgain(){
+  document.getElementById('done-overlay').classList.add('hidden');
+  resetGameState();
+  const dL=document.getElementById('die-letter'),dN=document.getElementById('die-number');
+  dL.className='die-box';dL.textContent='—';dN.className='die-box';dN.textContent='—';
+  document.getElementById('last-result-text').textContent='Place ships
+to begin';
+  G.ships=randomizeLocal();
+  buildMainGrid();
+  renderPlacementGrid();
+  showPlacementScreen();
+  updateUI();
+}
+
+// ── GRID RENDERING ─────────────────────────────────────────────────────────────
+function buildMainGrid(){
+  const colWrap=document.getElementById('col-labels');
+  const rowWrap=document.getElementById('grid-rows');
+  if(!colWrap||!rowWrap)return;
+  colWrap.innerHTML='<div style="width:22px;flex-shrink:0"></div>'+
+    'ABCDEF'.split('').map(l=>'<div class="col-label">'+l+'</div>').join('');
+  rowWrap.innerHTML='';
+  for(let r=0;r<GRID_SIZE;r++){
+    const row=document.createElement('div');row.className='grid-row';
+    const rl=document.createElement('div');rl.className='row-label';rl.textContent=r+1;row.appendChild(rl);
+    for(let c=0;c<GRID_SIZE;c++){
+      const cell=document.createElement('div');
+      cell.className='grid-cell';
+      cell.dataset.r=r;cell.dataset.c=c;
+      row.appendChild(cell);
+    }
+    rowWrap.appendChild(row);
+  }
+}
+function renderMainGrid(){
+  if(!G.grid)return;
+  for(let r=0;r<GRID_SIZE;r++){
+    for(let c=0;c<GRID_SIZE;c++){
+      const el=document.querySelector('[data-r="'+r+'"][data-c="'+c+'"]');
+      if(!el)continue;
+      const state=G.grid[r][c];
+      el.className='grid-cell'+(state==='empty'?'':' '+state);
+    }
+  }
+}
+function renderShipStatus(){
+  const panel=document.getElementById('ship-status');
+  if(!panel)return;
+  panel.innerHTML='';
+  SHIP_DISPLAY_NAMES.forEach((name,i)=>{
+    const hits=G.shipHits[i]||0;
+    const len=SHIP_LENGTHS[i];
+    const sunk=G.shipSunk[i]||false;
+    const card=document.createElement('div');
+    card.className='ship-card'+(sunk?' sunk':'');
+    const payLine=SHIP_PAYOUTS[i].map((p,h)=>h>0&&p>0?h+'hit:+'+p+'x':'').filter(Boolean).join(' ');
+    card.innerHTML='<div class="ship-name">'+name+(sunk?' ✓':'')+'</div>'+
+      '<div class="ship-hp">'+Array.from({length:len},(_,j)=>'<div class="hp-sq'+(j<hits?' hit':'')+'"></div>').join('')+'</div>'+
+      '<div class="ship-payout">'+(sunk?'SUNK':payLine)+'</div>';
+    panel.appendChild(card);
+  });
+}
+
+// ── UPDATE UI ────────────────────────────────────────────────────────────────
+function updateUI(){
+  const net=r2(G.bankroll-G.startingBankroll);
+  const pnlColor=net>=0?'#7ee87e':'#f08080';
+  const e=id=>document.getElementById(id);
+  if(e('hud-bankroll'))e('hud-bankroll').textContent=fmtS(G.bankroll);
+  if(e('hud-bet-top'))e('hud-bet-top').textContent=G.phase!=='placement'?'Bet: '+fmt(G.bet):'Bet: —';
+  if(e('hud-missiles'))e('hud-missiles').textContent=G.missilesRemaining;
+  if(e('hud-lastwin'))e('hud-lastwin').textContent=G.lastWin>0?fmt(G.lastWin):'—';
+  const pnlTop=e('hud-pnl-top');if(pnlTop){pnlTop.textContent=(net>=0?'+':'-')+fmtS(Math.abs(net));pnlTop.style.color=pnlColor;}
+  const pnlBot=e('hud-pnl-bottom');if(pnlBot){pnlBot.textContent=(net>=0?'+':'')+fmt(net);pnlBot.style.color=pnlColor;}
+  const pnlD=e('pnl-display');if(pnlD){pnlD.textContent=(net>=0?'+':'')+fmt(net);pnlD.style.color=pnlColor;}
+  if(e('missiles-count'))e('missiles-count').textContent=G.missilesRemaining;
+  // Fire button
+  const fireBtn=e('fire-btn');
+  if(fireBtn)fireBtn.disabled=G.phase!=='firing'||G.missilesRemaining<=0||G.firing;
+  // Buy button
+  const buyBtn=e('buy-btn');
+  if(buyBtn){
+    const showBuy=G.phase==='firing'&&G.missilesRemaining===0&&G.canBuy;
+    buyBtn.style.display=G.phase==='firing'?'block':'none';
+    buyBtn.disabled=!showBuy||G.firing||G.buyPrice>G.bankroll;
+    if(showBuy)buyBtn.textContent='🎯 Buy Missile
+'+fmt(G.buyPrice);
+    else if(G.phase==='firing'&&G.missilesRemaining===0&&!G.canBuy)buyBtn.textContent='Max missiles bought';
+    else buyBtn.textContent='';
+  }
+  renderMainGrid();
+  renderShipStatus();
+}
+
+// ── BOOT ─────────────────────────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('auth-screen').style.display!=='none')handleAuth();});
+selectChip(5);
+buildMainGrid();
+tryRestoreSession();
+
+</script>
+</body>
+</html>
