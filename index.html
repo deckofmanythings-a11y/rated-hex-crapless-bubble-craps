@@ -199,18 +199,18 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
 #pass-main.active-bar{background:rgba(255,215,0,.15)}
 
 /* ── GAME MODE TOGGLE ── */
-#game-mode-toggle{display:flex;gap:3px;padding:3px;width:100%;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
+#game-mode-toggle{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px;width:100%;border-top:1px solid rgba(255,255,255,.1);flex-shrink:0}
 .gmode-btn{flex:1;padding:3px 4px;border-radius:4px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);cursor:pointer;font-size:14px;font-weight:700;color:rgba(255,255,255,.5);text-align:center;transition:all .15s;line-height:1.3}
 .gmode-btn.active{background:rgba(255,215,0,.18);border-color:#ffd700;color:#fff}
 .gmode-btn:disabled{opacity:.35;cursor:not-allowed}
 .gmode-btn .gmode-sub{font-size:11px;font-weight:400;color:rgba(255,255,255,.4);display:block}
 .gmode-btn.active .gmode-sub{color:rgba(255,215,0,.6)}
 /* Don't Pass stub */
-#dont-pass-stub{display:none;flex:.5;min-height:0;border-radius:4px;background:rgba(40,0,0,.3);border:0.5px solid rgba(255,80,80,.2);align-items:center;justify-content:center;flex-direction:column;opacity:.5;cursor:not-allowed}
+#dont-pass-stub{display:none;flex:1;min-height:0;border-radius:4px;background:rgba(40,0,0,.3);border:0.5px solid rgba(255,80,80,.2);align-items:center;justify-content:center;flex-direction:column;opacity:.5;cursor:not-allowed}
 .dp-stub-name{font-size:16px;font-weight:900;letter-spacing:.08em;color:rgba(255,100,100,.7)}
 .dp-stub-note{font-size:11px;color:rgba(255,255,255,.3)}
 /* Don't Pass real bar */
-#dp-bar{display:none;flex:.5;min-height:0;border-radius:4px;background:rgba(80,0,0,.3);border:0.5px solid rgba(255,80,80,.35);flex-direction:column;overflow:hidden}
+#dp-bar{display:none;flex:1;min-height:0;border-radius:4px;background:rgba(80,0,0,.3);border:0.5px solid rgba(255,80,80,.35);flex-direction:column;overflow:hidden}
 #dp-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:background .12s}
 #dp-main:hover{background:rgba(255,80,80,.1)}
 #dp-main.active-bar{background:rgba(180,0,0,.25)}
@@ -242,12 +242,7 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
 .nb-lay .nb-lbl{color:rgba(255,130,130,.55)}
 .nb-lay .nb-stk{color:#ff9999}
 .nb-lay .nb-pay{color:rgba(255,130,130,.35)}
-/* DC waiting bar at end of number strip */
-.dc-wait-bar{flex-shrink:0;width:36px;display:none;flex-direction:column;border-radius:3px;background:rgba(80,0,0,.25);border:0.5px solid rgba(255,80,80,.25);cursor:pointer;align-items:center;justify-content:center;transition:background .12s;position:relative;margin-left:2px}
-.dc-wait-bar:hover{background:rgba(120,0,0,.4)}
-.dc-wait-bar.active-bar{background:rgba(140,0,0,.45);border-color:rgba(255,80,80,.6)}
-.dcw-lbl{font-size:9px;font-weight:700;color:rgba(255,130,130,.8);letter-spacing:.04em;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);line-height:1}
-.dcw-stk{font-size:9px;color:#ffd700;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg)}
+/* DC box uses .num-box styles, these are cleaned up */
 /* Field info text per mode */
 .field-info-crapless{display:block}
 .field-info-standard{display:none}
@@ -428,6 +423,12 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
         <button class="gmode-btn" id="gmode-standard" onclick="switchGameMode('standard')">
           STANDARD<span class="gmode-sub">7 &amp; 11 win</span>
         </button>
+        <button class="gmode-btn" onclick="window.location.href='sicbo.html'" style="border-color:rgba(255,180,0,.3);color:rgba(255,200,80,.8)">
+          SIC-BO<span class="gmode-sub">3 dice</span>
+        </button>
+        <button class="gmode-btn" disabled style="opacity:.25;cursor:not-allowed">
+          DESTROYER<span class="gmode-sub">Coming soon</span>
+        </button>
       </div>
     </div>
 
@@ -601,11 +602,9 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
         </div>
         <!-- Come / Field / Pass with 1-unit spacers -->
         <div id="cfp-zone">
-          <div style="flex:.5;min-height:0"></div>
           <div class="zone-bar" id="come-bar" onclick="placeBet('come')">
             <div style="text-align:center"><div class="zone-name">COME</div><div class="zone-stk" id="stk-come"></div></div>
           </div>
-          <div style="flex:.5;min-height:0"></div>
           <div class="zone-bar" id="field-bar" onclick="placeBet('field')">
             <div style="text-align:center">
               <div style="font-size:15px;color:rgba(255,255,255,.55)">2 · 3 · 4 · 9 · 10 · 11 · 12</div>
@@ -616,14 +615,16 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
             </div>
             <button class="mbtn" id="m-field" onclick="event.stopPropagation();removeBet('field')" style="top:3px;right:3px">−</button>
           </div>
-          <div style="flex:.5;min-height:0"></div>
           <div id="dont-pass-stub" style="display:none">
             <div class="dp-stub-name">DON'T PASS</div>
             <div class="dp-stub-note">Crapless only</div>
           </div>
           <div id="dp-bar">
             <div id="dp-main" onclick="placeBet('dp')">
-              <div class="dp-name">DON'T PASS</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap">
+                <div class="dp-name" style="font-size:23px">DON'T PASS</div>
+                <div id="dp-bar12" style="display:flex;align-items:center;gap:2px"><span style="font-size:23px;color:rgba(255,130,130,.45)">BAR</span><img id="dp-bar12-d1" style="width:18px;height:18px"><img id="dp-bar12-d2" style="width:18px;height:18px"></div>
+              </div>
               <div class="dp-stk" id="stk-dp"></div>
               <div class="dp-note" id="note-dp"></div>
               <button class="mbtn" id="m-dp" onclick="event.stopPropagation();removeDpFlat()" style="display:none;bottom:2px;right:3px">−</button>
@@ -676,7 +677,6 @@ html,body{height:100%;height:100dvh;overflow:hidden;font-family:system-ui,sans-s
         <button class="bar-btn danger" onclick="clearRemovable()">Clear</button>
         <button class="bar-btn" id="double-btn" onclick="doubleBet()">Double</button>
         <button class="bar-btn" id="repeat-btn" onclick="repeatLastBet()" disabled>Repeat</button>
-        <button class="bar-btn" onclick="window.location.href='sicbo.html'" style="border-color:rgba(255,180,0,.4);color:rgba(255,200,80,.9)">Sic-Bo</button>
       </div>
     </div>
     <!-- ROLL spans both rows -->
@@ -745,18 +745,22 @@ function applyGameMode(mode){
     NUM_DEFS=NUM_DEFS_CRAPLESS;ALL_NUMS=ALL_NUMS_CRAPLESS;ALL_BOX_NUMS=ALL_NUMS_CRAPLESS;
   }
   REPEATABLE=getRepeatable();
-  // Update CSS column count for number strip
-  document.documentElement.style.setProperty('--num-cols', mode==='standard'?'6':'10');
+  // Update CSS column count for number strip: 6+1 DC box in standard, 10 in crapless
+  document.documentElement.style.setProperty('--num-cols', mode==='standard'?'7':'10');
+  // Wire bar-12 die images in DP bar (uses DIE_B64 — only available after it's defined)
+  if(typeof DIE_B64!=='undefined'){
+    const b12d1=document.getElementById('dp-bar12-d1'),b12d2=document.getElementById('dp-bar12-d2');
+    if(b12d1)b12d1.src='data:image/png;base64,'+DIE_B64[6];
+    if(b12d2)b12d2.src='data:image/png;base64,'+DIE_B64[6];
+  }
   // Update mode toggle buttons
   document.getElementById('gmode-crapless').classList.toggle('active',mode==='crapless');
   document.getElementById('gmode-standard').classList.toggle('active',mode==='standard');
   // Show/hide Don't Pass (standard = real bar, crapless = hidden entirely)
   const dps=document.getElementById('dont-pass-stub');
   const dpb=document.getElementById('dp-bar');
-  if(dps)dps.style.display='none'; // stub never shown now
+  if(dps)dps.style.display='none';
   if(dpb)dpb.style.display=mode==='standard'?'flex':'none';
-  // DC wait bar: shown only in standard mode (rebuilt by buildStrip)
-  document.querySelectorAll('.dc-wait-bar').forEach(el=>el.style.display=mode==='standard'?'flex':'none');
   // Show field payout label for current mode
   document.querySelectorAll('.field-info-crapless').forEach(el=>el.style.display=mode==='crapless'?'block':'none');
   document.querySelectorAll('.field-info-standard').forEach(el=>el.style.display=mode==='standard'?'block':'none');
@@ -832,11 +836,16 @@ function chkRepeat(){
 }
 function checkBroke(){if(G.bankroll<=0&&tBets()===0)setTimeout(()=>openRedeemModal(true),300);}
 function hasWorkingBets(){
-  if(G.bets['pass'])return true; // counts whether locked or not
+  if(G.bets['pass']||G.bets['dp'])return true;
+  if(G.bets['dpodds'])return true;
   if(G.bets['come']||G.comeBets.length>0)return true;
+  if(G.bets['dc']||G.dcBets.length>0)return true;
   if(G.bonus.low>0||G.bonus.all>0||G.bonus.high>0)return true;
   const act=bActive();
-  for(const n of ALL_NUMS){if(act&&(G.bets['place'+n]||G.bets['buy'+n]))return true;}
+  for(const n of ALL_NUMS){
+    if(act&&(G.bets['place'+n]||G.bets['buy'+n]))return true;
+    if(G.bets['lay'+n])return true;
+  }
   for(const k of['any7','horn','aces','ace2','midnight','yo','anyCraps','cande','eleven','field',...Object.keys(HOP_MAP),'hard4','hard6','hard8','hard10']){if(G.bets[k])return true;}
   return false;
 }
@@ -885,9 +894,13 @@ async function handleAuth(){
   const password=document.getElementById('auth-password').value;
   if(!username||!password){showAuthError('Please enter a username and password.');return;}
   const btn=document.getElementById('auth-btn');btn.disabled=true;btn.textContent='Please wait...';
-  try{if(_authMode==='register')await registerPlayer(username,password);else await loginPlayer(username,password);}
-  catch(e){showAuthError(e.message||'Something went wrong.');}
-  btn.disabled=false;btn.textContent=_authMode==='login'?'Log In':'Create Account';
+  try{
+    if(_authMode==='register')await registerPlayer(username,password);
+    else await loginPlayer(username,password);
+  }catch(e){
+    showAuthError(e.message||'Something went wrong.');
+    btn.disabled=false;btn.textContent=_authMode==='login'?'Log In':'Create Account';
+  }
 }
 async function hashPassword(p){const e=new TextEncoder().encode(p);const b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
 function generateToken(){return Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b=>b.toString(16).padStart(2,'0')).join('');}
@@ -1088,19 +1101,25 @@ function buildStrip(){
   const strip=document.getElementById('num-strip-h'),pr=document.getElementById('puck-row-h');
   if(!strip||!pr)return;
   strip.innerHTML='';pr.innerHTML='';
+  const isStd=activeGame==='standard';
   ALL_NUMS.forEach(n=>{
     const def=NUM_DEFS[n],[w,d]=def.place;
     const ps=document.createElement('div');ps.style.cssText='display:flex;align-items:center;justify-content:center;height:100%';
     const pk=document.createElement('div');pk.id='puck-'+n;pk.style.cssText='display:none;width:12px;height:12px;border-radius:50%;background:#fff;color:#0f5c28;font-size:11px;font-weight:700;align-items:center;justify-content:center;box-shadow:0 0 3px rgba(255,255,255,.5)';pk.textContent='ON';ps.appendChild(pk);pr.appendChild(ps);
     const wrap=document.createElement('div');wrap.className='num-box-wrap';
     const box=document.createElement('div');box.className='num-box';box.id='numbox-'+n;
-    // Buy/Lay split row
-    const bwrap=document.createElement('div');bwrap.className='nb-buy-wrap';
-    const bd=document.createElement('div');bd.className='nb-buy-left';bd.id='nb-buy-'+n;bd.onclick=()=>placeBet('buy'+n);
-    bd.innerHTML='<span class="nb-lbl">BUY</span><span class="nb-stk" id="stk-buy'+n+'"></span><div class="off-ov" id="off-buy-'+n+'" style="display:none"><span>OFF</span></div>';
-    const ld=document.createElement('div');ld.className='nb-lay';ld.id='nb-lay-'+n;ld.onclick=()=>placeLay(n);
-    ld.innerHTML='<span class="nb-lbl">LAY</span><span class="nb-stk" id="stk-lay'+n+'"></span>';
-    bwrap.appendChild(bd);bwrap.appendChild(ld);
+    if(isStd){
+      const bwrap=document.createElement('div');bwrap.className='nb-buy-wrap';
+      const bd=document.createElement('div');bd.className='nb-buy-left';bd.id='nb-buy-'+n;bd.onclick=()=>placeBet('buy'+n);
+      bd.innerHTML='<span class="nb-lbl">BUY</span><span class="nb-stk" id="stk-buy'+n+'"></span><div class="off-ov" id="off-buy-'+n+'" style="display:none"><span>OFF</span></div>';
+      const ld=document.createElement('div');ld.className='nb-lay';ld.id='nb-lay-'+n;ld.onclick=()=>placeLay(n);
+      ld.innerHTML='<span class="nb-lbl">LAY</span><span class="nb-stk" id="stk-lay'+n+'"></span>';
+      bwrap.appendChild(bd);bwrap.appendChild(ld);box.appendChild(bwrap);
+    }else{
+      const bd=document.createElement('div');bd.className='nb-buy';bd.id='nb-buy-'+n;bd.onclick=()=>placeBet('buy'+n);
+      bd.innerHTML='<span class="nb-lbl">BUY</span><span class="nb-stk" id="stk-buy'+n+'"></span><div class="off-ov" id="off-buy-'+n+'" style="display:none"><span>OFF</span></div>';
+      box.appendChild(bd);
+    }
     const md=document.createElement('div');md.className='nb-mid';md.id='nb-mid-'+n;
     const nl=document.createElement('span');nl.style.cssText='font-size:21px;font-weight:700';nl.textContent=def.label;
     const cs=document.createElement('div');cs.id='come-slot-'+n;cs.style.cssText='width:100%;margin-top:1px';
@@ -1108,21 +1127,32 @@ function buildStrip(){
     md.appendChild(nl);md.appendChild(cs);md.appendChild(dcs);
     const pd=document.createElement('div');pd.className='nb-place';pd.id='nb-place-'+n;pd.onclick=()=>placeBet('place'+n);
     pd.innerHTML='<span class="nb-lbl">PLACE</span><span class="nb-stk" id="stk-place'+n+'"></span><div class="off-ov" id="off-place-'+n+'" style="display:none"><span>OFF</span></div><span class="nb-pay">'+w+':'+d+'</span>';
-    box.appendChild(bwrap);box.appendChild(md);box.appendChild(pd);wrap.appendChild(box);
-    // minus buttons
-    const mb=document.createElement('button');mb.className='mbtn-buy';mb.id='mb-buy'+n;mb.textContent='−';mb.onclick=()=>removeBet('buy'+n);
-    const ml=document.createElement('button');ml.className='mbtn-buy';ml.id='mb-lay'+n;ml.textContent='−';ml.style.cssText='display:none;position:absolute;top:1px;left:1px;width:10px;height:10px;border-radius:2px;background:rgba(100,0,0,.8);border:0.5px solid rgba(255,100,100,.5);color:#fff;font-size:15px;line-height:9px;text-align:center;cursor:pointer;z-index:4;padding:0';ml.onclick=()=>removeLay(n);
-    const mp=document.createElement('button');mp.className='mbtn-place';mp.id='mb-place'+n;mp.textContent='−';mp.onclick=()=>removeBet('place'+n);
-    wrap.appendChild(mb);wrap.appendChild(ml);wrap.appendChild(mp);strip.appendChild(wrap);
+    box.appendChild(md);box.appendChild(pd);wrap.appendChild(box);
+    const mb=document.createElement('button');mb.className='mbtn-buy';mb.id='mb-buy'+n;mb.textContent='\u2212';mb.onclick=()=>removeBet('buy'+n);
+    const mp=document.createElement('button');mp.className='mbtn-place';mp.id='mb-place'+n;mp.textContent='\u2212';mp.onclick=()=>removeBet('place'+n);
+    wrap.appendChild(mb);
+    if(isStd){
+      const ml=document.createElement('button');ml.id='mb-lay'+n;ml.textContent='\u2212';ml.style.cssText='display:none;position:absolute;top:1px;left:1px;width:10px;height:10px;border-radius:2px;background:rgba(100,0,0,.8);border:0.5px solid rgba(255,100,100,.5);color:#fff;font-size:15px;line-height:9px;text-align:center;cursor:pointer;z-index:4;padding:0';ml.onclick=()=>removeLay(n);
+      wrap.appendChild(ml);
+    }
+    wrap.appendChild(mp);strip.appendChild(wrap);
   });
-  // DC waiting bar at right end — standard mode only
-  const dcWait=document.createElement('div');dcWait.className='dc-wait-bar';dcWait.id='dc-wait-bar';
-  dcWait.style.display=activeGame==='standard'?'flex':'none';
-  dcWait.onclick=()=>placeBet('dc');
-  dcWait.innerHTML='<span class="dcw-lbl">DON\'T COME</span><span class="dcw-stk" id="stk-dc-wait"></span>';
-  strip.appendChild(dcWait);
-  // puck row spacer for DC bar
-  const psp=document.createElement('div');psp.style.cssText='flex-shrink:0;width:38px';pr.appendChild(psp);
+  if(isStd){
+    const psp=document.createElement('div');psp.style.cssText='display:flex;align-items:center;justify-content:center;height:100%';pr.appendChild(psp);
+    const dcWrap=document.createElement('div');dcWrap.className='num-box-wrap';dcWrap.id='dc-wait-wrap';
+    const dcBox=document.createElement('div');dcBox.className='num-box';dcBox.id='dc-wait-bar';dcBox.style.cssText='background:rgba(60,0,0,.25);border-color:rgba(255,80,80,.3);cursor:pointer';
+    dcBox.onclick=()=>placeBet('dc');
+    const dcMid=document.createElement('div');dcMid.className='nb-mid';dcMid.style.cssText='flex:1;justify-content:center;gap:2px';
+    dcMid.innerHTML='<span style="font-size:23px;font-weight:900;color:rgba(255,130,130,.9);letter-spacing:.03em;line-height:1.1">DON\'T<br>COME</span>'
+      +'<span style="display:flex;align-items:center;justify-content:center;gap:2px;margin-top:1px">'
+      +'<span style="font-size:23px;color:rgba(255,130,130,.45)">BAR</span>'
+      +'<img src="data:image/png;base64,'+DIE_B64[6]+'" style="width:18px;height:18px">'
+      +'<img src="data:image/png;base64,'+DIE_B64[6]+'" style="width:18px;height:18px">'
+      +'</span>'
+      +'<div id="stk-dc-wait" style="font-size:13px;color:#ffd700;min-height:9px;margin-top:1px"></div>';
+    dcBox.appendChild(dcMid);
+    dcWrap.appendChild(dcBox);strip.appendChild(dcWrap);
+  }
 }
 // applyGameMode calls buildStrip internally; set initial state to crapless
 // (will be overridden by startSession/applyServerGameState on login)
@@ -1459,7 +1489,7 @@ function updateUI(){
     // Come slot
     const slot=document.getElementById('come-slot-'+n);if(!slot)return;
     const cbIdx=G.comeBets.findIndex(c=>c.num===n);
-    if(cbIdx>=0){const cb=G.comeBets[cbIdx],cur=cb.odds||0,lim=oddsLim(cb.flat,n),atMax=r2(cur)>=r2(lim),canOdds=!atMax&&G.bankroll>0;let html='<div class="come-on-box"><span class="come-flat-amt">'+fmt(cb.flat)+'</span>';if(canOdds)html+='<button class="come-odds-btn" onclick="openComeOddsModal('+cbIdx+')">+O</button>';if(cur>0)html+='<span class="come-odds-amt">'+fmt(cur)+'</span><button class="come-odds-rm" onclick="event.stopPropagation();removeComeOdds('+cbIdx+')">−</button>';html+='<button class="come-rm" onclick="event.stopPropagation();removeComeFlat('+cbIdx+')">−</button></div>';slot.innerHTML=html;}
+    if(cbIdx>=0){const cb=G.comeBets[cbIdx],cur=cb.odds||0,lim=oddsLim(cb.flat,n),atMax=r2(cur)>=r2(lim),canOdds=!atMax&&G.bankroll>0;let html='<div class="come-on-box"><span class="come-flat-amt">'+fmt(cb.flat)+'</span><span style="font-size:10px;opacity:.6">🔒</span>';if(canOdds)html+='<button class="come-odds-btn" onclick="openComeOddsModal('+cbIdx+')">+O</button>';if(cur>0)html+='<span class="come-odds-amt">'+fmt(cur)+'</span><button class="come-odds-rm" onclick="event.stopPropagation();removeComeOdds('+cbIdx+')">−</button>';html+='</div>';slot.innerHTML=html;}
     else slot.innerHTML='';
     // DC slot
     const dslot=document.getElementById('dc-slot-'+n);if(!dslot)return;
@@ -1500,7 +1530,7 @@ function updateUI(){
     if(dpOPay)dpOPay.textContent=G.point?(LAY_LABEL[G.point]||'—'):'—';
   }
   // Pass
-  {const ps=document.getElementById('stk-pass');if(ps)ps.textContent=(G.bets['pass']||0)?fmt(G.bets['pass']):'';const lk=document.getElementById('lk-pass');if(lk)lk.textContent=G.passLocked?'locked':'';const pm=document.getElementById('pass-main');if(pm)pm.classList.toggle('active-bar',!!(G.bets['pass']));const mb=document.getElementById('m-pass');if(mb)mb.style.display=(G.bets['pass']&&!G.passLocked)?'block':'none';const poc=G.bets['passodds']||0;const postk=document.getElementById('stk-passodds');if(postk)postk.textContent=poc?fmt(poc):'';const polim=document.getElementById('po-limit');const poc2=document.getElementById('pass-odds-cell');if(G.point&&G.bets['pass']){const m=ODDS_MULT[G.point]||1;if(polim)polim.textContent=m+'x·'+ODDS_LABEL[G.point];if(poc2)poc2.classList.toggle('active',poc>0);}else{if(polim)polim.textContent='—';if(poc2)poc2.classList.remove('active');}}
+  {const ps=document.getElementById('stk-pass');if(ps)ps.textContent=(G.bets['pass']||0)?fmt(G.bets['pass']):'';const lk=document.getElementById('lk-pass');if(lk)lk.textContent=G.passLocked?'🔒':'';const pm=document.getElementById('pass-main');if(pm)pm.classList.toggle('active-bar',!!(G.bets['pass']));const mb=document.getElementById('m-pass');if(mb)mb.style.display=(G.bets['pass']&&!G.passLocked)?'block':'none';const poc=G.bets['passodds']||0;const postk=document.getElementById('stk-passodds');if(postk)postk.textContent=poc?fmt(poc):'';const polim=document.getElementById('po-limit');const poc2=document.getElementById('pass-odds-cell');if(G.point&&G.bets['pass']){const m=ODDS_MULT[G.point]||1;if(polim)polim.textContent=m+'x·'+ODDS_LABEL[G.point];if(poc2)poc2.classList.toggle('active',poc>0);}else{if(polim)polim.textContent='—';if(poc2)poc2.classList.remove('active');}}
   // Bonus bets
   const bO=G.bonus.open,bL=G.bonus.locked,bG=G.bonus.gracePeriod;
   [{type:'low',nums:LOW_NUMS,hit:G.bonus.lowHit},{type:'high',nums:HIGH_NUMS,hit:G.bonus.highHit}].forEach(({type,nums,hit})=>{
